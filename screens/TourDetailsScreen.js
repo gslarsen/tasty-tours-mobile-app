@@ -24,7 +24,7 @@ const TourDetailsScreen = props => {
         <TouchableOpacity
           key={location.locationName}
           style={styles.listItem}
-          onPress={() => props.navigation.navigate("LocationDetails", { name: location.locationName })}
+          onPress={() => props.navigation.navigate("LocationDetails", { tourId, name: location.locationName })}
         >
           <View>
             <Text>{location.locationName}</Text>
@@ -47,10 +47,10 @@ const TourDetailsScreen = props => {
 
 TourDetailsScreen.navigationOptions = (navData) => {
   // console.log('NAV OPTIONS:', navData.navigation.getParam('name'))
-  const cityName = navData.navigation.getParam('name');
+  const tourName = navData.navigation.getParam('name');
 
   return {
-    headerTitle: `${cityName} Destinations`,
+    headerTitle: `${tourName} Destinations`,
     headerStyle: {
       backgroundColor: Colors.primaryColor
     },

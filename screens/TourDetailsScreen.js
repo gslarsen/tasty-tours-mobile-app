@@ -10,19 +10,28 @@ import {
 import { TOURS } from "../data/data";
 import Colors from '../constants/Colors';
 
+
 const TourDetailsScreen = props => {
+  // console.log('PROPS :', props.navigation.getParam('id'));
+
+  const tourId = props.navigation.getParam('id');
+
   const renderListItem = data => {
-    console.log(data);
-    return (
-      <TouchableOpacity
-        style={styles.listItem}
-        onPress={() => props.navigation.navigate("LocationDetails", {id: data.item.id, name: data.item.name})}
-      >
-        <View>
-          <Text>{data.item.name}</Text>
-        </View>
-      </TouchableOpacity>
-    );
+    const tour = TOURS.find(item => item.id === tourId );
+    
+    return tour.locations.map((location) => {
+      return (
+        <TouchableOpacity
+          key={location.locationName}
+          style={styles.listItem}
+          onPress={() => props.navigation.navigate("LocationDetails", { name: location.locationName })}
+        >
+          <View>
+            <Text>{location.locationName}</Text>
+          </View>
+        </TouchableOpacity>
+      );
+    });
   };
 
   return (
@@ -35,13 +44,19 @@ const TourDetailsScreen = props => {
   );
 };
 
-TourDetailsScreen.navigationOptions = {
-  headerTitle: 'Tours',
-  headerStyle: {
-    backgroundColor: Colors.primaryColor
-  },
-  headerTintColor: 'white'
-}
+
+TourDetailsScreen.navigationOptions = (navData) => {
+  // console.log('NAV OPTIONS:', navData.navigation.getParam('name'))
+  const cityName = navData.navigation.getParam('name');
+
+  return {
+    headerTitle: `${cityName} Destinations`,
+    headerStyle: {
+      backgroundColor: Colors.primaryColor
+    },
+    headerTintColor: 'white'  
+  }
+};
 
 const styles = StyleSheet.create({
   listItem: {

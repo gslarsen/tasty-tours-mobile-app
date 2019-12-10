@@ -6,7 +6,7 @@ import {
   FlatList,
   TouchableOpacity,
   Platform,
-  Image
+  ImageBackground
 } from "react-native";
 
 import { CITIES } from "../data/data";
@@ -32,8 +32,17 @@ const CitiesScreen = props => {
   };
 
   return (
-    <View>
-      <Image style={styles.image} source={require("../assets/hero.jpeg")} />
+    <View style={{flex:1}}>
+      <View>
+        <ImageBackground
+          style={styles.image}
+          source={require("../assets/hero.jpeg")}
+        >
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>TASTY TOURS</Text>
+          </View>
+        </ImageBackground>
+      </View>
       <FlatList
         keyExtractor={(item, idx) => item.id}
         data={CITIES}
@@ -45,7 +54,7 @@ const CitiesScreen = props => {
 };
 
 CitiesScreen.navigationOptions = {
-  headerTitle: "TASTY TOURS",
+  // headerTitle: "TASTY TOURS",
   headerStyle: {
     backgroundColor: Colors.primaryColor
     //backgroundColor: Platform.OS === "android" ? Colors.primaryColor : ""
@@ -53,7 +62,7 @@ CitiesScreen.navigationOptions = {
   headerTitleStyle: {
     fontFamily: "open-sans-bold"
   },
-  headerTintColor: 'white'
+  headerTintColor: "white"
   //headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor
 };
 
@@ -65,7 +74,8 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     borderWidth: 1,
     padding: 10,
-    backgroundColor: Colors.accentColor
+    backgroundColor: Colors.accentColor,
+    borderRadius: 7
   },
   text: {
     color: Colors.primaryColor,
@@ -77,7 +87,20 @@ const styles = StyleSheet.create({
     height: 200,
     marginTop: 20,
     marginBottom: 15,
-    marginLeft: 6.5
+    marginLeft: 7,
+    borderRadius: 10,
+    justifyContent: "center"
+  },
+  titleContainer: {
+    backgroundColor: "rgba(0,0,0,0.2)",
+    paddingVertical: 5,
+    paddingHorizontal: 12
+  },
+  title: {
+    fontFamily: "lobster",
+    fontSize: 40,
+    color: "white",
+    textAlign: "center"
   }
 });
 

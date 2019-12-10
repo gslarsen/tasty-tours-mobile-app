@@ -5,48 +5,68 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
-  Platform
+  Platform,
+  ImageBackground
 } from "react-native";
 
 import { TOURS } from "../data/data";
-import Colors from '../constants/Colors';
+import Colors from "../constants/Colors";
 
 const ToursScreen = props => {
   // console.log('PROPS :', props.navigation.getParam('id'));
 
-  const cityId = props.navigation.getParam('id');
+  const cityId = props.navigation.getParam("id");
 
   const renderListItem = data => {
-    const availableItems = TOURS.filter(item => item.cityId === cityId );
-    
-    return availableItems.map((item) => {
+    const availableItems = TOURS.filter(item => item.cityId === cityId);
+
+    return availableItems.map(item => {
       return (
-        <TouchableOpacity
-          key={item.id}
-          style={styles.listItem}
-          onPress={() => props.navigation.navigate("TourDetails", {id: item.id, name: item.name})}
-        >
-          <View>
-            <Text style={styles.text}>{item.name}</Text>
-          </View>
-        </TouchableOpacity>
+        <View key={item.id}style={styles.tourItem}>
+          <TouchableOpacity
+            onPress={() =>
+              props.navigation.navigate("TourDetails", {
+                id: item.id,
+                name: item.name
+              })
+            }
+          >
+            <View>
+              <View style={{ ...styles.tourRow, ...styles.tourHeader }}>
+                <ImageBackground
+                  source={require("../assets/hero.jpeg")}
+                  style={styles.image}
+                >
+                  <View style={styles.titleContainer}>
+                    <Text style={styles.title}>{item.name}</Text>
+                  </View>
+                </ImageBackground>
+              </View>
+              <View style={{ ...styles.tourRow, ...styles.tourDetail }}>
+                <Text>{item.description}</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        </View>
       );
     });
   };
 
   return (
-    <FlatList
-      keyExtractor={(item, idx) => item.id}
-      data={TOURS}
-      renderItem={renderListItem}
-      numColumns={1}
-    />
+    <View style={styles.list}>
+      <FlatList
+        keyExtractor={(item, idx) => item.id}
+        data={TOURS}
+        renderItem={renderListItem}
+        numColumns={1}
+      />
+    </View>
   );
 };
 
-ToursScreen.navigationOptions = (navData) => {
+ToursScreen.navigationOptions = navData => {
   // console.log('NAV OPTIONS:', navData.navigation.getParam('name'))
-  const cityName = navData.navigation.getParam('name');
+  const cityName = navData.navigation.getParam("name");
 
   return {
     headerTitle: `${cityName.match(/^(.+?),/)[1]} Tours`,
@@ -54,24 +74,54 @@ ToursScreen.navigationOptions = (navData) => {
       backgroundColor: Colors.primaryColor
       //backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : ''
     },
-    headerTintColor: 'white'
+    headerTintColor: "white"
     //headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor
-  }
+  };
 };
 
 const styles = StyleSheet.create({
-  listItem: {
-    marginVertical: 10,
-    marginHorizontal: 60,
-    width: '70%',
-    borderColor: "#ccc",
-    borderWidth: 1,
-    padding: 10
+  tourItem: {
+    height: 200,
+    width: "100%",
+    backgroundColor: "#f5f5f5",
+    borderRadius: 10,
+    overflow: "hidden",
+    marginVertical: 10
   },
-  text: {
-    color: Colors.primaryColor,
-    fontFamily: 'open-sans-bold',
+  tourRow: {
+    flexDirection: "row"
+  },
+  tourHeader: {
+    height: "50%"
+  },
+  tourDetail: {
+    paddingHorizontal: 10,
+    justifyContent: "space-between",
+    alignItems: "center",
+    height: "50%",
+    textAlign: "justify"
+  },
+  titleContainer: {
+    backgroundColor: "rgba(0,0,0,0.1)",
+    paddingVertical: 5,
+    paddingHorizontal: 12
+  },
+  title: {
+    fontFamily: "open-sans-bold",
+    fontSize: 30,
+    color: "white",
     textAlign: "center"
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    justifyContent: "center"
+  },
+  list: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 15
   }
 });
 

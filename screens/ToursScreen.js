@@ -4,7 +4,8 @@ import {
   Text,
   StyleSheet,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  Platform
 } from "react-native";
 
 import { TOURS } from "../data/data";
@@ -26,7 +27,7 @@ const ToursScreen = props => {
           onPress={() => props.navigation.navigate("TourDetails", {id: item.id, name: item.name})}
         >
           <View>
-            <Text>{item.name}</Text>
+            <Text style={styles.text}>{item.name}</Text>
           </View>
         </TouchableOpacity>
       );
@@ -48,21 +49,29 @@ ToursScreen.navigationOptions = (navData) => {
   const cityName = navData.navigation.getParam('name');
 
   return {
-    headerTitle: `${cityName} Tours`,
+    headerTitle: `${cityName.match(/^(.+?),/)[1]} Tours`,
     headerStyle: {
       backgroundColor: Colors.primaryColor
+      //backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : ''
     },
-    headerTintColor: 'white'  
+    headerTintColor: 'white'
+    //headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor
   }
 };
 
 const styles = StyleSheet.create({
   listItem: {
     marginVertical: 10,
-    marginHorizontal: 20,
+    marginHorizontal: 60,
+    width: '70%',
     borderColor: "#ccc",
     borderWidth: 1,
     padding: 10
+  },
+  text: {
+    color: Colors.primaryColor,
+    fontFamily: 'open-sans-bold',
+    textAlign: "center"
   }
 });
 

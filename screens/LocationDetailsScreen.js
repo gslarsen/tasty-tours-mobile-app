@@ -1,37 +1,41 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity
-} from "react-native";
+import { View, Text, StyleSheet, FlatList, Platform } from "react-native";
+import ViewMoreText from "react-native-view-more-text";
 
 import { TOURS } from "../data/data";
-import Colors from '../constants/Colors';
+import Colors from "../constants/Colors";
 
 const LocationDetailsScreen = props => {
   // console.log('PROPS :', props.navigation.getParam('id'));
-  const tourId = props.navigation.getParam('tourId');
-  const locName = props.navigation.getParam('name');
+  const tourId = props.navigation.getParam("tourId");
+  const locName = props.navigation.getParam("name");
+
+  const renderViewMore = onPress => {
+    return <Text onPress={onPress}>View more</Text>;
+  };
+
+  const renderViewLess = onPress => {
+    return <Text onPress={onPress}>View less</Text>;
+  };
 
   const renderListItem = data => {
     const tour = TOURS.find(item => item.id === tourId);
-    const location = tour.locations.find(location => location.locationName === locName);
-    
-    // return tour.locations.map((location) => {
-    //   return (
-    //     <TouchableOpacity
-    //       key={location.locationName}
-    //       style={styles.listItem}
-    //       onPress={() => props.navigation.navigate("LocationDetails", { name: location.locationName })}
-    //     >
-    //       <View>
-    //         <Text>{location.locationName}</Text>
-    //       </View>
-    //     </TouchableOpacity>
-    //   );
-    // });
+    const location = tour.locations.find(
+      location => location.locationName === locName
+    );
+
+    return (
+      <View style={styles.summary}>
+        <ViewMoreText
+          numberOfLines={13}
+          renderViewMore={this.renderViewMore}
+          renderViewLess={this.renderViewLess}
+          textStyle={{}}
+        >
+          <Text style={styles.text}>{location.summary}</Text>
+        </ViewMoreText>
+      </View>
+    );
   };
 
   return (
@@ -44,26 +48,33 @@ const LocationDetailsScreen = props => {
   );
 };
 
-LocationDetailsScreen.navigationOptions = (navData) => {
+LocationDetailsScreen.navigationOptions = navData => {
   // console.log('NAV OPTIONS:', navData.navigation.getParam('name'))
-  const locName = navData.navigation.getParam('name');
+  const locName = navData.navigation.getParam("name");
 
   return {
     headerTitle: `${locName}`,
     headerStyle: {
       backgroundColor: Colors.primaryColor
+      //backgroundColor: Platform.OS === "android" ? Colors.primaryColor : ""
     },
-    headerTintColor: 'white'  
-  }
+    headerTintColor: 'white'
+    // headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor
+  };
 };
 
 const styles = StyleSheet.create({
-  listItem: {
+  summary: {
     marginVertical: 10,
     marginHorizontal: 20,
     borderColor: "#ccc",
     borderWidth: 1,
     padding: 10
+  },
+  text: {
+    color: Colors.primaryColor,
+    fontFamily: "open-sans",
+    textAlign: "justify"
   }
 });
 

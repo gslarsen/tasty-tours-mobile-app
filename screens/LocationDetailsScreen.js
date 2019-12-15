@@ -48,7 +48,8 @@ const LocationDetailsScreen = props => {
           color={Colors.primary}
           onPress={() => {
             console.log(props);
-            props.navigation.navigate("MapDynamic", {});
+            props.navigation.navigate("MapDynamic", {tourId,
+              name: locName });
           }}
         />
       </View>

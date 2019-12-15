@@ -29,6 +29,7 @@ export const TOURS = [
       {
         locationName: "MOFU Shoppe",
         address: "321 S Blount St, Raleigh, NC 27601",
+        coordinates: {latitude: 35.7758713, longitude: -78.63637829999999},
         phone: "(919) 301-8465",
         image:
           "https://morganandco.com/wp-content/uploads/2019/10/2019-10-16-MCo-6-Ways-Help-Target-Customer-Find-Restaurant-Online-400x200.jpg",
@@ -41,6 +42,7 @@ export const TOURS = [
       {
         locationName: "The Green Light",
         address: "108 1/2 East Hargett Street, Raleigh, NC 27601",
+        coordinates: {latitude: 35.7782729, longitude: -78.63920159999999},
         phone: "(919) 833-4949",
         image:
           "https://lh5.googleusercontent.com/p/AF1QipN0YitmHvg5oIrb1V8DAxomHJ5lBlldBGb2JDN6=w408-h306-k-no",
@@ -54,6 +56,7 @@ export const TOURS = [
       {
         locationName: "St. Roch Fine Oysters + Bar",
         address: "223 S. Wilmington Street, Raleigh, NC 27601",
+        coordinates: {latitude: 35.7775196, longitude: -78.6379455},
         phone: "(919) 322-0359",
         image:
           "https://images.squarespace-cdn.com/content/v1/58922c1bbe65942118bf6143/1507064830193-RJ06LOEZD82C2K6L6LCE/ke17ZwdGBToddI8pDm48kLkXF2pIyv_F2eUT9F60jBl7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0iyqMbMesKd95J-X4EagrgU9L3Sa3U8cogeb0tjXbfawd0urKshkc5MgdBeJmALQKw/DSC06151.jpg?format=1500w",
@@ -67,6 +70,7 @@ export const TOURS = [
       {
         locationName: "BITTERSWEET",
         address: "16 E. Martin Street, Raleigh, NC 27601",
+        coordinates: {latitude: 35.7768286, longitude: -78.6386742},
         phone: "(919) 977-3829",
         image:
         "https://media-cdn.tripadvisor.com/media/photo-s/0f/8c/24/d1/desserts.jpg",

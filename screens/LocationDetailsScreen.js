@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, StyleSheet, FlatList, Platform } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Platform,
+  Button
+} from "react-native";
 import ViewMoreText from "react-native-view-more-text";
 
 import { TOURS } from "../data/data";
@@ -25,15 +32,25 @@ const LocationDetailsScreen = props => {
     );
 
     return (
-      <View style={styles.summary}>
-        <ViewMoreText
-          numberOfLines={13}
-          renderViewMore={this.renderViewMore}
-          renderViewLess={this.renderViewLess}
-          textStyle={{}}
-        >
-          <Text style={styles.text}>{location.summary}</Text>
-        </ViewMoreText>
+      <View>
+        <View style={styles.summary}>
+          <ViewMoreText
+            numberOfLines={13}
+            renderViewMore={this.renderViewMore}
+            renderViewLess={this.renderViewLess}
+            textStyle={{}}
+          >
+            <Text style={styles.text}>{location.summary}</Text>
+          </ViewMoreText>
+        </View>
+        <Button
+          title="Go to Map"
+          color={Colors.primary}
+          onPress={() => {
+            console.log(props);
+            props.navigation.navigate("MapDynamic", {});
+          }}
+        />
       </View>
     );
   };
@@ -58,7 +75,7 @@ LocationDetailsScreen.navigationOptions = navData => {
       backgroundColor: Colors.primaryColor
       //backgroundColor: Platform.OS === "android" ? Colors.primaryColor : ""
     },
-    headerTintColor: 'white'
+    headerTintColor: "white"
     // headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor
   };
 };

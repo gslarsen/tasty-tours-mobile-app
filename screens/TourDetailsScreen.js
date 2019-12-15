@@ -42,8 +42,14 @@ const TourDetailsScreen = props => {
                   </View>
                 </ImageBackground>
               </View>
-              <View style={{ ...styles.tourRow, ...styles.tourDetail }}>
-                <Text numberOfLines={5}>{location.briefSummary}</Text>
+              <View>
+                <View style={{ ...styles.tourRow, ...styles.tourDetail }}>
+                  <Text>{location.address.match(/^(.+?),/)[1]}</Text>
+                  <Text>{location.phone}</Text>
+                </View>
+                <View style={{...styles.tourRow, paddingHorizontal: 10, textAlign: "justify"}}>
+                  <Text numberOfLines={5}>{location.briefSummary}</Text>
+                </View>
               </View>
             </View>
           </TouchableOpacity>
@@ -81,7 +87,7 @@ TourDetailsScreen.navigationOptions = navData => {
 
 const styles = StyleSheet.create({
   tourItem: {
-    height: 200,
+    height: 250,
     width: "100%",
     backgroundColor: "#f5f5f5",
     borderRadius: 10,
@@ -95,16 +101,17 @@ const styles = StyleSheet.create({
     height: "50%"
   },
   tourDetail: {
+    paddingTop: 0,
     paddingHorizontal: 10,
     justifyContent: "space-between",
-    alignItems: "center",
-    height: "50%",
-    textAlign: "justify"
+    alignItems: "flex-start",
+    height: "20%",
+    paddingBottom: 10
   },
   titleContainer: {
     backgroundColor: "rgba(0,0,0,0.1)",
-    paddingVertical: 5,
-    paddingHorizontal: 12
+    paddingVertical: 0,
+    paddingHorizontal: 0
   },
   title: {
     fontFamily: "open-sans-bold",
@@ -113,8 +120,8 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   image: {
-    width: '100%',
-    height: 100,
+    width: "100%",
+    height: 115,
     justifyContent: "center"
   },
   list: {

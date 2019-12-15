@@ -50,6 +50,7 @@ export const TOURS = [
         summary:
           "The Green Light is a well kept cocktail secret aimed to intrigue every taste ranging from the cocktail connoisseur to the curious wanderer. The building was originally built in 1922, and when we found it we saw immediate character. As we pulled away old sheetrock and insulation, we found beautiful brick walls and windows that had been covered for decades. It was our vision to create a space that had a synergy with the historic business neighborhood while adding some comfortable, yet stylish, elements.\n\nIf you ever look up at the ceiling or look at a satellite view of our address, you’ll notice an enormous skylight in the shape of an arrow.\n\nWe wanted a bar and social house, so we created a craft beer menu, a specialty cocktail list, brought music, and then dimmed the lights. Follow the arrow and you’ll find a good time."
       },
+
       {
         locationName: "St. Roch Fine Oysters + Bar",
         address: "223 S. Wilmington Street, Raleigh, NC 27601",
@@ -61,8 +62,20 @@ export const TOURS = [
 
         summary:
           "Fresh Oysters and NC's best with a touch of New Orleans from Chef Sunny Gerhart, an alum of the highly-acclaimed Poole's Diner. In addition to oysters shucked or roasted, St. Roch does brunch with a pair of waffles – one sweet and topped with fruit and maple syrup, another savory and stuffed with sausage and topped with creole cane syrup. In place of doughnuts, Gerhart serves his dinner dessert, a mound of brioche beignets, the New Orleans breakfast icon, served here with bourbon caramel sauce.  For more of a savory lunch dish, the fired catfish po’boy comes wiht roasted tomato and Tabasco aioli.  For drinks, St. Roch gets creative. The best name is “Mary Smokes When She Drinks,” a Bloody Mary riff made with smoked tomato juice and hot sauce. There’s also a matcha gimlet for those craving the popular green tea, but also gin."
-      }
+      },
+
+      {
+        locationName: "BITTERSWEET",
+        address: "16 E. Martin Street, Raleigh, NC 27601",
+        phone: "(919) 977-3829",
+        image:
+        "https://media-cdn.tripadvisor.com/media/photo-s/0f/8c/24/d1/desserts.jpg",
+        
+        briefSummary: "Bittersweet is a terribly wonderful cocktail, dessert and coffee lounge with an all-natural, local, seasonal menu. We are a place where you can get bourbon with your pie, champagne with your cake and Irish whiskey in your coffee. Our menu changes each season, with drink and dessert pairing specials offered regularly.",
+
+        summary:
+          "Bittersweet is a terribly wonderful cocktail, dessert and coffee lounge with an all-natural, local, seasonal menu. We are a place where you can get bourbon with your pie, champagne with your cake and Irish whiskey in your coffee. Our menu changes each season, with drink and dessert pairing specials offered regularly. \n\nBittersweet offers a seasonal and classic cocktail menu, with an emphasis on gin cocktails. We have over 55 different gins—many unique and rare in this state. We even have special “Gin Club” events. Our beer selection contains unique smaller breweries from North Carolina and all over. Our wine choices reflect our love of bubbles—champagne, cava, prosecco—our motto is “champagne saved is champagne wasted. \n\nWe have a full coffee and espresso menu with beans from our pals over in Durham, Counter Culture Coffee. Desserts are baked in-house daily from chef-owner Kim Hammer’s recipes—many going back years from Kim’s early days with her original company, bittycakes. Most weekends you will find Kim behind the bar plating tasty treats, next to our skilled and witty bartenders.  We love chatting with our customers, so join us for cocktails, dessert and late night banter—that’s right, we said banter and we meant it. We are responsible for some rather magnificent banter."
+      },
     ]
   )
 ];
-

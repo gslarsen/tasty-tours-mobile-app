@@ -27,7 +27,7 @@ const TourDetailsScreen = props => {
         <View key={location.locationName} style={styles.tourItem}>
           <TouchableOpacity
             onPress={() =>
-              props.navigation.navigate("MapDynamic", {
+              props.navigation.navigate("LocationDetails", {
                 tourId,
                 name: location.locationName
               })
@@ -74,17 +74,19 @@ const TourDetailsScreen = props => {
         renderItem={renderListItem}
         numColumns={1}
         ListHeaderComponent={
-          <Button
-            title="Show Tour Map"
-            color={Colors.primary}
-            onPress={() => {
-              console.log(props);
-              props.navigation.navigate("MapDynamic", {
-                tourId,
-                name: locName
-              });
-            }}
-          />
+          <View style={styles.button}>
+            <Button
+              title="Show Tour Map"
+              color={Colors.primary}
+              onPress={() => {
+                console.log(props);
+                props.navigation.navigate("MapDynamic", {
+                  tourId,
+                  name: locName
+                });
+              }}
+            />
+          </View>
         }
       />
     </View>
@@ -150,6 +152,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 15
+  },
+  button: {
+    width: "40%",
+    borderRadius: 100,
+    marginLeft: 110
   }
 });
 

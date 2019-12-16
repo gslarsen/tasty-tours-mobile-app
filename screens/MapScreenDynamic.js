@@ -106,4 +106,19 @@ const MapScreenDynamic = props => {
   );
 };
 
+MapScreenDynamic.navigationOptions = navData => {
+  // console.log('NAV OPTIONS:', navData.navigation.getParam('name'))
+  const tourName = navData.navigation.getParam("name");
+
+  return {
+    headerTitle: `${tourName}`,
+    headerStyle: {
+      backgroundColor: Colors.primaryColor
+      // backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : ''
+    },
+    headerTintColor: "white"
+    //headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor
+  };
+};
+
 export default MapScreenDynamic;

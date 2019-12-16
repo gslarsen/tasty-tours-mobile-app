@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import { Dimensions, StyleSheet } from "react-native";
-import MapView from "react-native-maps";
+import { View, Text, Dimensions, StyleSheet } from "react-native";
+import MapView, { Marker, Callout } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 
 import ENV from "../env";
 import { TOURS } from "../data/data";
+import Colors from "../constants/Colors";
 
 const { width, height } = Dimensions.get("window");
 const ASPECT_RATIO = width / height;
 // const LATITUDE = 37.771707;
 // const LONGITUDE = -122.4053769;
-const LATITUDE_DELTA = 0.0922;
+const LATITUDE_DELTA = 0.09;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const GOOGLE_MAPS_APIKEY = ENV.googleApiKey;
@@ -22,8 +23,9 @@ const MapScreenDynamic = props => {
   const tour = TOURS.find(tour => tour.id === tourId);
   const tourLocations = tour.locations;
   const locationCoords = tourLocations.map(location => location.coordinates);
-
+  
   const state = {
+    locations: tourLocations.map(location => location.locationName),
     coordinates: locationCoords
     //   {
     //     latitude: 37.3317876,
@@ -55,11 +57,14 @@ const MapScreenDynamic = props => {
         longitudeDelta: LONGITUDE_DELTA
       }}
       style={StyleSheet.absoluteFill}
-      ref={c => (mapView = c)}
+        ref={c => (mapView = c)}
       onPress={onMapPress}
     >
+    
       {currState.coordinates.map((coordinate, index) => (
-        <MapView.Marker key={`coordinate_${index}`} coordinate={coordinate} />
+        <MapView.Marker key={`coordinate_${index}`} coordinate={coordinate} style={{backgroundColor: Colors.accentColor, padding: 5, borderRadius: 0.5}}>
+          <View><Text style={{fontSize: 8}}>{state.locations[index]}</Text></View>
+        </MapView.Marker>
       ))}
       {currState.coordinates.length >= 2 && (
         <MapViewDirections

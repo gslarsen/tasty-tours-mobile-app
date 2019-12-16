@@ -6,7 +6,8 @@ import {
   FlatList,
   TouchableOpacity,
   Platform,
-  ImageBackground
+  ImageBackground,
+  Button
 } from "react-native";
 
 import { TOURS } from "../data/data";
@@ -16,6 +17,7 @@ const TourDetailsScreen = props => {
   // console.log('PROPS :', props.navigation.getParam('id'));
 
   const tourId = props.navigation.getParam("id");
+  const locName = props.navigation.getParam("name");
 
   const renderListItem = data => {
     const tour = TOURS.find(item => item.id === tourId);
@@ -25,7 +27,7 @@ const TourDetailsScreen = props => {
         <View key={location.locationName} style={styles.tourItem}>
           <TouchableOpacity
             onPress={() =>
-              props.navigation.navigate("LocationDetails", {
+              props.navigation.navigate("MapDynamic", {
                 tourId,
                 name: location.locationName
               })
@@ -47,7 +49,13 @@ const TourDetailsScreen = props => {
                   <Text>{location.address.match(/^(.+?),/)[1]}</Text>
                   <Text>{location.phone}</Text>
                 </View>
-                <View style={{...styles.tourRow, paddingHorizontal: 10, textAlign: "justify"}}>
+                <View
+                  style={{
+                    ...styles.tourRow,
+                    paddingHorizontal: 10,
+                    textAlign: "justify"
+                  }}
+                >
                   <Text numberOfLines={5}>{location.briefSummary}</Text>
                 </View>
               </View>
@@ -65,6 +73,19 @@ const TourDetailsScreen = props => {
         data={TOURS}
         renderItem={renderListItem}
         numColumns={1}
+        ListHeaderComponent={
+          <Button
+            title="Show Tour Map"
+            color={Colors.primary}
+            onPress={() => {
+              console.log(props);
+              props.navigation.navigate("MapDynamic", {
+                tourId,
+                name: locName
+              });
+            }}
+          />
+        }
       />
     </View>
   );

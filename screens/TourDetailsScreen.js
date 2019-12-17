@@ -94,7 +94,6 @@ const TourDetailsScreen = props => {
 };
 
 TourDetailsScreen.navigationOptions = navData => {
-  console.log('NAV OPTIONS:', navData)
   const tourName = navData.navigation.getParam("name");
 
   return {

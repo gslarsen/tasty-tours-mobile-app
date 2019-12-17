@@ -11,8 +11,6 @@ import Colors from "../constants/Colors";
 
 const { width, height } = Dimensions.get("window");
 const ASPECT_RATIO = width / height;
-// const LATITUDE = 37.771707;
-// const LONGITUDE = -122.4053769;
 const LATITUDE_DELTA = 0.09;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
@@ -25,22 +23,15 @@ const MapScreenDynamic = props => {
   const tour = TOURS.find(tour => tour.id === tourId);
   const tourLocations = tour.locations;
   const locationCoords = tourLocations.map(location => location.coordinates);
-  
+
   const state = {
     locations: tourLocations.map(location => location.locationName),
     coordinates: locationCoords
-    //   {
-    //     latitude: 37.3317876,
-    //     longitude: -122.0054812
-    //   },
-    //   {
-    //     latitude: 37.771707,
-    //     longitude: -122.4053769
-    //   }
-    // ]
   };
 
   const [currState, setCurrState] = useState(state);
+  let length = 0;
+  let time = 0;
 
   const onMapPress = e => {
     setCurrState({
@@ -59,13 +50,38 @@ const MapScreenDynamic = props => {
         longitudeDelta: LONGITUDE_DELTA
       }}
       style={StyleSheet.absoluteFill}
-        ref={c => (mapView = c)}
-      onPress={onMapPress}
+      ref={c => (mapView = c)}
+      onPoiClick={e => console.log(e)}
     >
-    
+      <Marker
+        coordinate={{
+          latitude: locationCoords[0].latitude + 0.0002,
+          longitude: locationCoords[0].longitude
+        }}
+        style={{
+          backgroundColor: Colors.accentColor,
+          padding: 5,
+          borderRadius: 0.5
+        }}
+      >
+        <View>
+          <Text style={{ fontSize: 8 }}>{`Distance: ${length} m\nTime: ${time}`}</Text>
+        </View>
+      </Marker>
+
       {currState.coordinates.map((coordinate, index) => (
-        <MapView.Marker key={`coordinate_${index}`} coordinate={coordinate} style={{backgroundColor: Colors.accentColor, padding: 5, borderRadius: 0.5}}>
-          <View><Text style={{fontSize: 8}}>{state.locations[index]}</Text></View>
+        <MapView.Marker
+          key={`coordinate_${index}`}
+          coordinate={coordinate}
+          style={{
+            backgroundColor: Colors.accentColor,
+            padding: 5,
+            borderRadius: 0.5
+          }}
+        >
+          <View>
+            <Text style={{ fontSize: 8 }}>{state.locations[index]}</Text>
+          </View>
         </MapView.Marker>
       ))}
       {currState.coordinates.length >= 2 && (
@@ -87,15 +103,17 @@ const MapScreenDynamic = props => {
             );
           }}
           onReady={result => {
-            console.log(`Distance: ${result.distance} km`);
-            console.log(`Duration: ${result.duration} min.`);
+            console.log(`Distance: ${result.distance * 0.621371} m`);
+            length = (result.distance * 0.621371).toFixed(1);
+            console.log(`Duration: ${result.duration} min`);
+            time = result.duration.toFixed(1);
 
             mapView.fitToCoordinates(result.coordinates, {
               edgePadding: {
-                right: width / 20,
-                bottom: height / 20,
-                left: width / 20,
-                top: height / 20
+                right: width / 10,
+                bottom: height / 10,
+                left: width / 10,
+                top: height / 10
               }
             });
           }}
@@ -115,16 +133,16 @@ MapScreenDynamic.navigationOptions = navData => {
   return {
     headerTitle: `${tourName}`,
     headerStyle: {
-      backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : ''
+      backgroundColor: Platform.OS === "android" ? Colors.primaryColor : ""
     },
-    headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor,
+    headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor,
     headerRight: (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
           title="Home"
           iconName="md-home"
           onPress={() => {
-            navData.navigation.navigate('Cities');
+            navData.navigation.navigate("Cities");
           }}
         />
       </HeaderButtons>

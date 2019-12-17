@@ -12,16 +12,17 @@ import {
 
 import { TOURS } from "../data/data";
 import Colors from "../constants/Colors";
+import MapHeader from "../components/MapHeader";
 
 const TourDetailsScreen = props => {
   // console.log('PROPS :', props.navigation.getParam('id'));
 
   const tourId = props.navigation.getParam("id");
   const locName = props.navigation.getParam("name");
+  const tour = TOURS.find(item => item.id === tourId);
+  const initialLocCoords = tour.locations[0].coordinates;
 
   const renderListItem = data => {
-    const tour = TOURS.find(item => item.id === tourId);
-
     return tour.locations.map(location => {
       return (
         <View key={location.locationName} style={styles.tourItem}>
@@ -74,19 +75,7 @@ const TourDetailsScreen = props => {
         renderItem={renderListItem}
         numColumns={1}
         ListHeaderComponent={
-          <View style={styles.button}>
-            <Button
-              title="Show Tour Map"
-              color={Colors.primary}
-              onPress={() => {
-                console.log(props);
-                props.navigation.navigate("MapDynamic", {
-                  tourId,
-                  name: locName
-                });
-              }}
-            />
-          </View>
+          <MapHeader style={styles.map} location={initialLocCoords}/>
         }
       />
     </View>
@@ -153,10 +142,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 15
   },
-  button: {
-    width: "40%",
-    borderRadius: 100,
-    marginLeft: 110
+  map: {
+    marginBottom: 10,
+    width: "100%",
+    height: 75,
+    borderColor: "#ccc",
+    borderWidth: 1
   }
 });
 

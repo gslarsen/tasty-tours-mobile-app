@@ -8,7 +8,9 @@ import {
   Button
 } from "react-native";
 import ViewMoreText from "react-native-view-more-text";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
+import HeaderButton from "../components/HeaderButton";
 import { TOURS } from "../data/data";
 import Colors from "../constants/Colors";
 
@@ -72,11 +74,20 @@ LocationDetailsScreen.navigationOptions = navData => {
   return {
     headerTitle: `${locName}`,
     headerStyle: {
-      backgroundColor: Colors.primaryColor
-      //backgroundColor: Platform.OS === "android" ? Colors.primaryColor : ""
+      backgroundColor: Platform.OS === "android" ? Colors.primaryColor : ""
     },
-    headerTintColor: "white"
-    // headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor
+    headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor,
+    headerRight: (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title="Home"
+          iconName="md-home"
+          onPress={() => {
+            navData.navigation.navigate('Cities');
+          }}
+        />
+      </HeaderButtons>
+    )
   };
 };
 

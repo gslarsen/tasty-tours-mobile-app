@@ -32,14 +32,14 @@ const CitiesScreen = props => {
   };
 
   return (
-    <View style={{flex:1}}>
+    <View style={{ flex: 1 }}>
       <View>
         <ImageBackground
           style={styles.image}
           source={require("../assets/hero.jpeg")}
         >
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>TASTY TOURS</Text>
+            <Text style={styles.title}>Sample Text</Text>
           </View>
         </ImageBackground>
       </View>
@@ -54,16 +54,15 @@ const CitiesScreen = props => {
 };
 
 CitiesScreen.navigationOptions = {
-  // headerTitle: "TASTY TOURS",
+  headerTitle: "TASTY TOURS",
   headerStyle: {
-    backgroundColor: Colors.primaryColor
-    //backgroundColor: Platform.OS === "android" ? Colors.primaryColor : ""
+    backgroundColor: Platform.OS === "android" ? Colors.primaryColor : "",
   },
   headerTitleStyle: {
-    fontFamily: "open-sans-bold"
-  },
-  headerTintColor: "white"
-  //headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor
+    fontFamily: "open-sans-bold",
+    textAlign: 'center'
+  },  
+  headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor
 };
 
 const styles = StyleSheet.create({
@@ -85,7 +84,7 @@ const styles = StyleSheet.create({
   image: {
     width: 400,
     height: 200,
-    marginTop: 20,
+    marginTop: 10,
     marginBottom: 15,
     marginLeft: 7,
     borderRadius: 10,
@@ -101,6 +100,9 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: "white",
     textAlign: "center"
+  },
+  headerButton: {
+    color: "blue"
   }
 });
 

@@ -9,7 +9,9 @@ import {
   ImageBackground,
   Button
 } from "react-native";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
+import HeaderButton from "../components/HeaderButton";
 import { TOURS } from "../data/data";
 import Colors from "../constants/Colors";
 import MapHeader from "../components/MapHeader";
@@ -75,10 +77,16 @@ const TourDetailsScreen = props => {
         renderItem={renderListItem}
         numColumns={1}
         ListHeaderComponent={
-          <MapHeader style={styles.map} location={initialLocCoords} onPress={() => {
-            props.navigation.navigate("MapDynamic", {tourId,
-              name: locName });
-          }}/>
+          <MapHeader
+            style={styles.map}
+            location={initialLocCoords}
+            onPress={() => {
+              props.navigation.navigate("MapDynamic", {
+                tourId,
+                name: locName
+              });
+            }}
+          />
         }
       />
     </View>
@@ -86,17 +94,26 @@ const TourDetailsScreen = props => {
 };
 
 TourDetailsScreen.navigationOptions = navData => {
-  // console.log('NAV OPTIONS:', navData.navigation.getParam('name'))
+  console.log('NAV OPTIONS:', navData)
   const tourName = navData.navigation.getParam("name");
 
   return {
     headerTitle: `${tourName} Stops`,
     headerStyle: {
-      backgroundColor: Colors.primaryColor
-      // backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : ''
+      backgroundColor: Platform.OS === "android" ? Colors.primaryColor : ""
     },
-    headerTintColor: "white"
-    //headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor
+    headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor,
+    headerRight: (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title="Home"
+          iconName="md-home"
+          onPress={() => {
+            navData.navigation.navigate('Cities');
+          }}
+        />
+      </HeaderButtons>
+    )
   };
 };
 

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, Dimensions, StyleSheet } from "react-native";
+import { View, Text, Dimensions, StyleSheet, Platform } from "react-native";
 import MapView, { Marker, Callout } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
+import HeaderButton from "../components/HeaderButton";
 import ENV from "../env";
 import { TOURS } from "../data/data";
 import Colors from "../constants/Colors";
@@ -113,11 +115,20 @@ MapScreenDynamic.navigationOptions = navData => {
   return {
     headerTitle: `${tourName}`,
     headerStyle: {
-      backgroundColor: Colors.primaryColor
-      // backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : ''
+      backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : ''
     },
-    headerTintColor: "white"
-    //headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor
+    headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor,
+    headerRight: (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title="Home"
+          iconName="md-home"
+          onPress={() => {
+            navData.navigation.navigate('Cities');
+          }}
+        />
+      </HeaderButtons>
+    )
   };
 };
 

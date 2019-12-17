@@ -71,11 +71,9 @@ ToursScreen.navigationOptions = navData => {
   return {
     headerTitle: `${cityName.match(/^(.+?),/)[1]} Tours`,
     headerStyle: {
-      backgroundColor: Colors.primaryColor
-      //backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : ''
+      backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : ''
     },
-    headerTintColor: "white"
-    //headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor
+    headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor
   };
 };
 

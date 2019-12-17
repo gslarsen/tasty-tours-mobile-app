@@ -75,7 +75,10 @@ const TourDetailsScreen = props => {
         renderItem={renderListItem}
         numColumns={1}
         ListHeaderComponent={
-          <MapHeader style={styles.map} location={initialLocCoords}/>
+          <MapHeader style={styles.map} location={initialLocCoords} onPress={() => {
+            props.navigation.navigate("MapDynamic", {tourId,
+              name: locName });
+          }}/>
         }
       />
     </View>

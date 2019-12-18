@@ -13,7 +13,6 @@ const ToursNavigator = createStackNavigator({
   Tours: ToursScreen,
   TourDetails: TourDetailsScreen,
   LocationDetails: LocationDetailsScreen,
-  MapStatic: MapScreenStatic,
   MapDynamic: MapScreenDynamic
 });
 

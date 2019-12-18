@@ -5,19 +5,23 @@ import {
   StyleSheet,
   FlatList,
   Platform,
-  Button
+  Button,
+  ImageBackground,
+  Image
 } from "react-native";
 import ViewMoreText from "react-native-view-more-text";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
+import LocationHeader from "../components/LocationHeader";
 import HeaderButton from "../components/HeaderButton";
 import { TOURS } from "../data/data";
 import Colors from "../constants/Colors";
 
 const LocationDetailsScreen = props => {
-  // console.log('PROPS :', props.navigation.getParam('id'));
+  // console.log('PROPS :', props);
   const tourId = props.navigation.getParam("tourId");
   const locName = props.navigation.getParam("name");
+  const place_id = props.navigation.getParam("place_id");
 
   const renderViewMore = onPress => {
     return <Text onPress={onPress}>View more</Text>;
@@ -32,9 +36,11 @@ const LocationDetailsScreen = props => {
     const location = tour.locations.find(
       location => location.locationName === locName
     );
-
+    console.log(location.image);
     return (
       <View>
+        <Image style={styles.image} source={{ uri: location.image }} />
+        <LocationHeader place_id={place_id} />
         <View style={styles.summary}>
           <ViewMoreText
             numberOfLines={13}
@@ -45,14 +51,9 @@ const LocationDetailsScreen = props => {
             <Text style={styles.text}>{location.summary}</Text>
           </ViewMoreText>
         </View>
-        <Button
-          title="Go to Map"
-          color={Colors.primary}
-          onPress={() => {
-            props.navigation.navigate("MapDynamic", {tourId,
-              name: locName });
-          }}
-        />
+
+        <Link toRoute={location.menu}>Menu</Link>
+        
       </View>
     );
   };
@@ -83,7 +84,7 @@ LocationDetailsScreen.navigationOptions = navData => {
           title="Home"
           iconName="md-home"
           onPress={() => {
-            navData.navigation.navigate('Cities');
+            navData.navigation.navigate("Cities");
           }}
         />
       </HeaderButtons>
@@ -95,14 +96,18 @@ const styles = StyleSheet.create({
   summary: {
     marginVertical: 10,
     marginHorizontal: 20,
-    borderColor: "#ccc",
-    borderWidth: 1,
     padding: 10
   },
   text: {
-    color: Colors.primaryColor,
     fontFamily: "open-sans",
     textAlign: "justify"
+  },
+  image: {
+    marginTop: 10,
+    width: 400,
+    height: 200,
+    borderRadius: 10,
+    marginLeft: 6
   }
 });
 

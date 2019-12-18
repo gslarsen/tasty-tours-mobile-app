@@ -32,7 +32,8 @@ const TourDetailsScreen = props => {
             onPress={() =>
               props.navigation.navigate("LocationDetails", {
                 tourId,
-                name: location.locationName
+                name: location.locationName,
+                place_id: location.place_id
               })
             }
           >

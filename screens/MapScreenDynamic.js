@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, Dimensions, StyleSheet, Platform } from "react-native";
+import { View, Text, Dimensions, StyleSheet, Platform, Alert } from "react-native";
 import MapView, { Marker, Callout } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
@@ -53,22 +53,6 @@ const MapScreenDynamic = props => {
       ref={c => (mapView = c)}
       onPoiClick={e => console.log(e)}
     >
-      <Marker
-        coordinate={{
-          latitude: locationCoords[0].latitude + 0.0002,
-          longitude: locationCoords[0].longitude
-        }}
-        style={{
-          backgroundColor: Colors.accentColor,
-          padding: 5,
-          borderRadius: 0.5
-        }}
-      >
-        <View>
-          <Text style={{ fontSize: 8 }}>{`Distance: ${length} m\nTime: ${time}`}</Text>
-        </View>
-      </Marker>
-
       {currState.coordinates.map((coordinate, index) => (
         <MapView.Marker
           key={`coordinate_${index}`}
@@ -84,6 +68,7 @@ const MapScreenDynamic = props => {
           </View>
         </MapView.Marker>
       ))}
+
       {currState.coordinates.length >= 2 && (
         <MapViewDirections
           origin={currState.coordinates[0]}
@@ -95,7 +80,7 @@ const MapScreenDynamic = props => {
           destination={currState.coordinates[currState.coordinates.length - 1]}
           apikey={GOOGLE_MAPS_APIKEY}
           strokeWidth={3}
-          strokeColor="hotpink"
+          strokeColor={Colors.primaryColor}
           optimizeWaypoints={true}
           onStart={params => {
             console.log(
@@ -103,10 +88,8 @@ const MapScreenDynamic = props => {
             );
           }}
           onReady={result => {
-            console.log(`Distance: ${result.distance * 0.621371} m`);
             length = (result.distance * 0.621371).toFixed(1);
-            console.log(`Duration: ${result.duration} min`);
-            time = result.duration.toFixed(1);
+            time = result.duration.toFixed(0);
 
             mapView.fitToCoordinates(result.coordinates, {
               edgePadding: {
@@ -116,7 +99,17 @@ const MapScreenDynamic = props => {
                 top: height / 10
               }
             });
+
+            Alert.alert(
+              `${locName}`,
+              `Distance: ${length} mi.\nDuration: ${time} min`,
+              [
+                {text: 'OK', onPress: () => console.log('OK Pressed')},
+              ],
+              {cancelable: false},
+            );
           }}
+
           onError={errorMessage => {
             console.log(errorMessage);
           }}

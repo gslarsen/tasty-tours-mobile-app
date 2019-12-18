@@ -27,12 +27,14 @@ export const TOURS = [
     "This tour is a fun and fantastic way to get to know the heart of downtown. Delicious savory and sweet tastings at unique, locally-owned restaurants, food shops, and food halls show off artisan preparations of regional dishes and bites.",
     [
       {
+        place_id: "ChIJlcDv8XJfrIkRomNGWepQfjw",
         locationName: "MOFU Shoppe",
         address: "321 S Blount St, Raleigh, NC 27601",
-        coordinates: {latitude: 35.7758713, longitude: -78.63637829999999},
+        coordinates: {latitude: 35.7759366, longitude: -78.6365848},
         phone: "(919) 301-8465",
         image:
           "https://morganandco.com/wp-content/uploads/2019/10/2019-10-16-MCo-6-Ways-Help-Target-Customer-Find-Restaurant-Online-400x200.jpg",
+        menu: 'https://www.mofushoppe.com/menus',
 
         briefSummary: "MOFU Shoppe derives its name from several sources: 'Fu' means fortune in Mandarin Chinese. MO (more) FU (fortune); more food, more fun.  MOFU Shoppe brings the flavors of Asia to downtown Raleigh, fittingly, in an old car dealership (hence the unique garage doors).",
 
@@ -40,6 +42,7 @@ export const TOURS = [
           "MOFU Shoppe derives its name from several sources: 'Fu' means fortune in Mandarin Chinese. MO (more) FU (fortune); more food, more fun.  MOFU Shoppe brings the flavors of Asia to downtown Raleigh, fittingly, in an old car dealership (hence the unique garage doors).  \n\nThe dishes are inspired by the foods commonly eaten in several Asian countries and represent our identity in a unique way. We like to refer to our approach to food and our identity as nature (Asian Americans) and nurture (who grew up in the South around lots of diverse ethnic food). \n\nSunny and Sophia started their journey to food by dreaming about building and running a food truck in 2013. With the help of a successful Kickstarter, they finished building the truck and started service in 2014 as a truck that sold dumplings and pho cheekily called the 'Dump Pho King Truck'. After a year in operation they were approached by Food Network and invited to compete, along with their high school friend Becca Plumlee, in Season 6 of the reality TV show The Great Food Truck Race with Tyler Florence under the name 'Pho Nomenal Dumpling Truck'. Despite setbacks, including a blown engine in the very first episode, the truck eventually went on to become the first and only all-female team to ever win a season of The Great Food Truck Race. After being crowned champions of Season 6, Sunny and Sophia decided to keep the 'Pho Nomenal Dumpling Truck' name and put their $50,000 winnings from the show towards their brick and mortar restaurant – MOFU Shoppe."
       },
       {
+        place_id: "ChIJ47ktj21frIkReHw8dqgs0aU",
         locationName: "The Green Light",
         address: "108 1/2 East Hargett Street, Raleigh, NC 27601",
         coordinates: {latitude: 35.7782729, longitude: -78.63920159999999},
@@ -54,6 +57,7 @@ export const TOURS = [
       },
 
       {
+        "place_id": "ChIJG4bhdnJfrIkR7ZYGFMACFIA",
         locationName: "St. Roch Fine Oysters + Bar",
         address: "223 S. Wilmington Street, Raleigh, NC 27601",
         coordinates: {latitude: 35.7775196, longitude: -78.6379455},
@@ -68,6 +72,7 @@ export const TOURS = [
       },
 
       {
+        "place_id": "ChIJneOkEHJfrIkRidqBmAyeguY",
         locationName: "BITTERSWEET",
         address: "16 E. Martin Street, Raleigh, NC 27601",
         coordinates: {latitude: 35.7768286, longitude: -78.6386742},

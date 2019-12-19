@@ -16,18 +16,19 @@ const ToursScreen = props => {
   // console.log('PROPS :', props.navigation.getParam('id'));
 
   const cityId = props.navigation.getParam("id");
+  const availableItems = TOURS.filter(item => item.cityId === cityId);
 
   const renderListItem = data => {
-    const availableItems = TOURS.filter(item => item.cityId === cityId);
-
-    return availableItems.map(item => {
+    console.log('DATA item:', data.item)
+    
+    
       return (
-        <View key={item.id}style={styles.tourItem}>
+        <View key={data.item.id}style={styles.tourItem}>
           <TouchableOpacity
             onPress={() =>
               props.navigation.navigate("TourDetails", {
-                id: item.id,
-                name: item.name
+                id: data.item.id,
+                name: data.item.name
               })
             }
           >
@@ -38,25 +39,25 @@ const ToursScreen = props => {
                   style={styles.image}
                 >
                   <View style={styles.titleContainer}>
-                    <Text style={styles.title}>{item.name}</Text>
+                    <Text style={styles.title}>{data.item.name}</Text>
                   </View>
                 </ImageBackground>
               </View>
               <View style={{ ...styles.tourRow, ...styles.tourDetail }}>
-                <Text>{item.description}</Text>
+                <Text>{data.item.description}</Text>
               </View>
             </View>
           </TouchableOpacity>
         </View>
       );
-    });
+  
   };
 
   return (
     <View style={styles.list}>
       <FlatList
-        keyExtractor={(item, idx) => item.id}
-        data={TOURS}
+        keyExtractor={(item) => item.id}
+        data={availableItems}
         renderItem={renderListItem}
         numColumns={1}
       />

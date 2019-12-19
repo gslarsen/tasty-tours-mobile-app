@@ -3,14 +3,12 @@ import {
   View,
   Text,
   ActivityIndicator,
-  FlatList,
-  TouchableOpacity,
-  Image,
   StyleSheet,
-  ImageBackground
+  Button
 } from "react-native";
 import Stars from "react-native-stars";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import * as WebBrowser from "expo-web-browser";
 
 import ENV from "../env";
 import Colors from "../constants/Colors";
@@ -20,13 +18,13 @@ class LocationHeader extends React.Component {
     super(props);
     this.state = { isLoading: true };
     this.locationHeaderUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${props.place_id}&fields=name,price_level,rating,photo,user_ratings_total&key=${ENV.googleApiKey}`;
+    this.menu = props.menu;
   }
 
   componentDidMount() {
     return fetch(this.locationHeaderUrl)
       .then(response => response.json())
       .then(responseJson => {
-        // console.log(responseJson.result)
         this.setState(
           {
             isLoading: false,
@@ -49,6 +47,7 @@ class LocationHeader extends React.Component {
     return result;
   }
 
+
   render() {
     if (this.state.isLoading) {
       return (
@@ -56,6 +55,10 @@ class LocationHeader extends React.Component {
           <ActivityIndicator />
         </View>
       );
+    }
+
+    const getMenu = () => {
+      WebBrowser.openBrowserAsync(this.menu);
     }
 
     return (
@@ -68,30 +71,46 @@ class LocationHeader extends React.Component {
             marginHorizontal: 100
           }}
         >
-          <Text>
-            {`Price: ${this.renderPriceLevelDollars(this.state.details.price_level)}`}
-          </Text>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-            <Text style={styles.details}>{`${this.state.details.rating}`}</Text>
-            <Stars
-              default={Math.round(this.state.details.rating * 2) / 2}
-              half={true}
-              spacing={1}
-              count={5}
-              starSize={50}
-              backingColor="orange"
-              fullStar={<Icon name={"star"} style={[styles.myStarStyle]} />}
-              emptyStar={
-                <Icon
-                  name={"star-outline"}
-                  style={[styles.myStarStyle, styles.myEmptyStarStyle]}
-                />
-              }
-              halfStar={
-                <Icon name={"star-half"} style={[styles.myStarStyle]} />
-              }
-            />
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <Text style={styles.rating}>{`${this.state.details.rating}`}</Text>
+            <View style={styles.stars}>
+              <Stars
+                default={Math.round(this.state.details.rating * 2) / 2}
+                half={true}
+                spacing={1}
+                count={5}
+                starSize={50}
+                backingColor="orange"
+                fullStar={<Icon name={"star"} style={[styles.myStarStyle]} />}
+                emptyStar={
+                  <Icon
+                    name={"star-outline"}
+                    style={[styles.myStarStyle, styles.myEmptyStarStyle]}
+                  />
+                }
+                halfStar={
+                  <Icon name={"star-half"} style={[styles.myStarStyle]} />
+                }
+              />
+            </View>
+            <Text style={styles.price}>
+              {`${this.renderPriceLevelDollars(
+                this.state.details.price_level
+              )}`}
+            </Text>
           </View>
+          <Button
+            style={styles.headerButton}
+            title="Menu"
+            color={Colors.primaryColor}
+            onPress={getMenu}
+          />
         </View>
       </View>
     );
@@ -99,11 +118,11 @@ class LocationHeader extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  details: {
+  rating: {
     fontFamily: "open-sans-bold",
+    fontSize: 16,
     textAlign: "center",
-    color: "orange",
-    paddingRight: 4
+    color: "orange"
   },
   myStarStyle: {
     color: "orange",
@@ -112,6 +131,17 @@ const styles = StyleSheet.create({
   },
   myEmptyStarStyle: {
     color: "white"
+  },
+  price: {
+    fontFamily: "open-sans",
+    paddingRight: 20,
+    fontSize: 15
+  },
+  headerButton: {
+    fontFamily: "open-sans-bold"
+  },
+  stars: {
+    paddingRight: 20
   }
 });
 

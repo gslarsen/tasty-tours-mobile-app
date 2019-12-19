@@ -33,7 +33,8 @@ const TourDetailsScreen = props => {
               props.navigation.navigate("LocationDetails", {
                 tourId,
                 name: location.locationName,
-                place_id: location.place_id
+                place_id: location.place_id,
+                menu: location.menu
               })
             }
           >
@@ -60,7 +61,7 @@ const TourDetailsScreen = props => {
                     textAlign: "justify"
                   }}
                 >
-                  <Text numberOfLines={5}>{location.briefSummary}</Text>
+                  <Text numberOfLines={5}>{location.summary}</Text>
                 </View>
               </View>
             </View>

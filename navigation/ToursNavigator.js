@@ -5,7 +5,6 @@ import CitiesScreen from '../screens/CitiesScreen';
 import ToursScreen from '../screens/ToursScreen';
 import TourDetailsScreen from '../screens/TourDetailsScreen';
 import LocationDetailsScreen from '../screens/LocationDetailsScreen';
-import MapScreenStatic from '../screens/MapScreenStatic';
 import MapScreenDynamic from '../screens/MapScreenDynamic';
 
 const ToursNavigator = createStackNavigator({
@@ -17,4 +16,5 @@ const ToursNavigator = createStackNavigator({
 });
 
 export default createAppContainer(ToursNavigator);
+
 

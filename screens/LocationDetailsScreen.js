@@ -5,8 +5,6 @@ import {
   StyleSheet,
   FlatList,
   Platform,
-  Button,
-  ImageBackground,
   Image
 } from "react-native";
 import ViewMoreText from "react-native-view-more-text";
@@ -18,10 +16,10 @@ import { TOURS } from "../data/data";
 import Colors from "../constants/Colors";
 
 const LocationDetailsScreen = props => {
-  // console.log('PROPS :', props);
   const tourId = props.navigation.getParam("tourId");
   const locName = props.navigation.getParam("name");
   const place_id = props.navigation.getParam("place_id");
+  const menu = props.navigation.getParam("menu");
 
   const renderViewMore = onPress => {
     return <Text onPress={onPress}>View more</Text>;
@@ -36,14 +34,14 @@ const LocationDetailsScreen = props => {
     const location = tour.locations.find(
       location => location.locationName === locName
     );
-    console.log(location.image);
+   
     return (
       <View>
         <Image style={styles.image} source={{ uri: location.image }} />
-        <LocationHeader place_id={place_id} />
+        <LocationHeader place_id={place_id} menu={menu}/>
         <View style={styles.summary}>
           <ViewMoreText
-            numberOfLines={13}
+            numberOfLines={17}
             renderViewMore={this.renderViewMore}
             renderViewLess={this.renderViewLess}
             textStyle={{}}
@@ -51,9 +49,6 @@ const LocationDetailsScreen = props => {
             <Text style={styles.text}>{location.summary}</Text>
           </ViewMoreText>
         </View>
-
-        <Link toRoute={location.menu}>Menu</Link>
-        
       </View>
     );
   };
@@ -103,7 +98,7 @@ const styles = StyleSheet.create({
     textAlign: "justify"
   },
   image: {
-    marginTop: 10,
+    marginTop: 15,
     width: 400,
     height: 200,
     borderRadius: 10,

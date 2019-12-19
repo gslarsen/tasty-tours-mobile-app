@@ -39,7 +39,7 @@ const CitiesScreen = props => {
           source={require("../assets/hero.jpeg")}
         >
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>Sample Text</Text>
+            <Text style={styles.title}>Tasty Tours</Text>
           </View>
         </ImageBackground>
       </View>

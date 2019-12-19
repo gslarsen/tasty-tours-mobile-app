@@ -19,8 +19,8 @@ const ToursScreen = props => {
   const availableItems = TOURS.filter(item => item.cityId === cityId);
 
   const renderListItem = data => {
-    console.log('DATA item:', data.item)
-    
+    console.log('DATA item:', data.item.image)
+    let image = data.item.image;
     
       return (
         <View key={data.item.id}style={styles.tourItem}>
@@ -35,7 +35,7 @@ const ToursScreen = props => {
             <View>
               <View style={{ ...styles.tourRow, ...styles.tourHeader }}>
                 <ImageBackground
-                  source={require("../assets/hero.jpeg")}
+                  source={{uri: image}}
                   style={styles.image}
                 >
                   <View style={styles.titleContainer}>

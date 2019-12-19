@@ -25,34 +25,34 @@ const TourDetailsScreen = props => {
   const initialLocCoords = tour.locations[0].coordinates;
 
   const renderListItem = data => {
-    return tour.locations.map(location => {
+    
       return (
-        <View key={location.locationName} style={styles.tourItem}>
+        <View key={data.item.locationName} style={styles.tourItem}>
           <TouchableOpacity
             onPress={() =>
               props.navigation.navigate("LocationDetails", {
                 tourId,
-                name: location.locationName,
-                place_id: location.place_id,
-                menu: location.menu
+                name: data.item.locationName,
+                place_id: data.item.place_id,
+                menu: data.item.menu
               })
             }
           >
             <View>
               <View style={{ ...styles.tourRow, ...styles.tourHeader }}>
                 <ImageBackground
-                  source={{ uri: location.image }}
+                  source={{ uri: data.item.image }}
                   style={styles.image}
                 >
                   <View style={styles.titleContainer}>
-                    <Text style={styles.title}>{location.locationName}</Text>
+                    <Text style={styles.title}>{data.item.locationName}</Text>
                   </View>
                 </ImageBackground>
               </View>
               <View>
                 <View style={{ ...styles.tourRow, ...styles.tourDetail }}>
-                  <Text>{location.address.match(/^(.+?),/)[1]}</Text>
-                  <Text>{location.phone}</Text>
+                  <Text>{data.item.address.match(/^(.+?),/)[1]}</Text>
+                  <Text>{data.item.phone}</Text>
                 </View>
                 <View
                   style={{
@@ -61,21 +61,22 @@ const TourDetailsScreen = props => {
                     textAlign: "justify"
                   }}
                 >
-                  <Text numberOfLines={5}>{location.summary}</Text>
+                  <Text numberOfLines={4}>{data.item.summary}</Text>
+                  <Text></Text>
                 </View>
               </View>
             </View>
           </TouchableOpacity>
         </View>
       );
-    });
+
   };
 
   return (
     <View style={styles.list}>
       <FlatList
-        keyExtractor={(item, idx) => item.id}
-        data={TOURS}
+        keyExtractor={(item, idx) => item.place_id }
+        data={tour.locations}
         renderItem={renderListItem}
         numColumns={1}
         ListHeaderComponent={
@@ -120,7 +121,7 @@ TourDetailsScreen.navigationOptions = navData => {
 
 const styles = StyleSheet.create({
   tourItem: {
-    height: 250,
+    height: 225,
     width: "100%",
     backgroundColor: "#f5f5f5",
     borderRadius: 10,
@@ -134,11 +135,11 @@ const styles = StyleSheet.create({
     height: "50%"
   },
   tourDetail: {
-    paddingTop: 0,
-    paddingHorizontal: 10,
+    paddingTop: 5,
+    paddingHorizontal: 12,
     justifyContent: "space-between",
     alignItems: "flex-start",
-    height: "20%",
+    height: "25%",
     paddingBottom: 10
   },
   titleContainer: {

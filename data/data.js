@@ -24,6 +24,7 @@ export const TOURS = [
     "t1",
     "c1",
     "Foodies!",
+    'https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,h_200,q_85,w_400/v1/clients/raleigh/tt_head_7_22_19_bdf716ae-da6f-4980-8e36-b283f11ee59f.jpg',
     "This tour is a fun and fantastic way to get to know the heart of downtown. Delicious savory and sweet tastings at unique, locally-owned restaurants, food shops, and food halls show off artisan preparations of regional dishes and bites.",
     [
       {
@@ -89,11 +90,13 @@ export const TOURS = [
   new Tour (
     't2',
     'c1',
-    'FUNNIES'
+    'Dinner & Drinks',
+    'https://cache.marriott.com/marriottassets/marriott/RDUMC/rdumc-center-3285-hor-clsc.jpg?downsize=2880px:*',
   ),
   new Tour (
     't3',
-    'c2',
-    'DELICASSIES'
-  ),
+    'c1',
+    'Craft Cocktails',
+    'https://wwwcache.wral.com/asset/entertainment/out_and_about/2019/01/09/18113158/Atlantic-Lounge-2018_Food-Seen149-DMID1-5hf2zmjvq-540x360.jpg',
+  )
 ];

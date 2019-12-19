@@ -68,8 +68,8 @@ CitiesScreen.navigationOptions = {
 const styles = StyleSheet.create({
   listItem: {
     marginVertical: 10,
-    marginHorizontal: 60,
-    width: "70%",
+    marginHorizontal: 80,
+    width: "60%",
     borderColor: "#ccc",
     borderWidth: 1,
     padding: 10,

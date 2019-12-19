@@ -47,7 +47,6 @@ class LocationHeader extends React.Component {
     return result;
   }
 
-
   render() {
     if (this.state.isLoading) {
       return (
@@ -59,65 +58,62 @@ class LocationHeader extends React.Component {
 
     const getMenu = () => {
       WebBrowser.openBrowserAsync(this.menu);
-    }
+    };
 
     return (
-      <View style={{ flex: 1, paddingTop: 20 }}>
-        <View
-          style={{
-            justifyContent: "space-between",
-            alignItems: "center",
-            flexDirection: "row",
-            marginHorizontal: 100
-          }}
-        >
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            <Text style={styles.rating}>{`${this.state.details.rating}`}</Text>
-            <View style={styles.stars}>
-              <Stars
-                default={Math.round(this.state.details.rating * 2) / 2}
-                half={true}
-                spacing={1}
-                count={5}
-                starSize={50}
-                backingColor="orange"
-                fullStar={<Icon name={"star"} style={[styles.myStarStyle]} />}
-                emptyStar={
-                  <Icon
-                    name={"star-outline"}
-                    style={[styles.myStarStyle, styles.myEmptyStarStyle]}
-                  />
-                }
-                halfStar={
-                  <Icon name={"star-half"} style={[styles.myStarStyle]} />
-                }
-              />
-            </View>
-            <Text style={styles.price}>
-              {`${this.renderPriceLevelDollars(
-                this.state.details.price_level
-              )}`}
-            </Text>
+      <View style={styles.container}>
+        <View style={styles.starContainer}>
+          <Text style={styles.rating}>{`${this.state.details.rating}`}</Text>
+          <View style={styles.stars}>
+            <Stars
+              default={Math.round(this.state.details.rating * 2) / 2}
+              half={true}
+              spacing={1}
+              count={5}
+              starSize={50}
+              backingColor="orange"
+              fullStar={<Icon name={"star"} style={[styles.myStarStyle]} />}
+              emptyStar={
+                <Icon
+                  name={"star-outline"}
+                  style={[styles.myStarStyle, styles.myEmptyStarStyle]}
+                />
+              }
+              halfStar={
+                <Icon name={"star-half"} style={[styles.myStarStyle]} />
+              }
+            />
           </View>
-          <Button
-            style={styles.headerButton}
-            title="Menu"
-            color={Colors.primaryColor}
-            onPress={getMenu}
-          />
         </View>
+        <Text style={styles.price}>
+          {`${this.renderPriceLevelDollars(this.state.details.price_level)}`}
+        </Text>
+
+        <Button
+          style={styles.headerButton}
+          title="Menu"
+          color={Colors.primaryColor}
+          onPress={getMenu}
+        />
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginHorizontal: 90,
+    width: "55%",
+    paddingTop: 10
+  },
+  starContainer: {
+    flexDirection: 'row',
+    justifyContent: "center",
+    alignItems: 'center'
+  },
   rating: {
     fontFamily: "open-sans-bold",
     fontSize: 16,
@@ -134,14 +130,14 @@ const styles = StyleSheet.create({
   },
   price: {
     fontFamily: "open-sans",
-    paddingRight: 20,
     fontSize: 15
   },
   headerButton: {
-    fontFamily: "open-sans-bold"
+    fontFamily: "open-sans-bold",
+    width: 20
   },
   stars: {
-    paddingRight: 20
+    paddingLeft: 5
   }
 });
 

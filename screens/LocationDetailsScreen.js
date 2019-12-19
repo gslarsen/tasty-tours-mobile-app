@@ -29,37 +29,27 @@ const LocationDetailsScreen = props => {
     return <Text onPress={onPress}>View less</Text>;
   };
 
-  const renderListItem = data => {
-    const tour = TOURS.find(item => item.id === tourId);
-    const location = tour.locations.find(
-      location => location.locationName === locName
-    );
-   
-    return (
-      <View>
-        <Image style={styles.image} source={{ uri: location.image }} />
-        <LocationHeader place_id={place_id} menu={menu}/>
-        <View style={styles.summary}>
-          <ViewMoreText
-            numberOfLines={17}
-            renderViewMore={this.renderViewMore}
-            renderViewLess={this.renderViewLess}
-            textStyle={{}}
-          >
-            <Text style={styles.text}>{location.summary}</Text>
-          </ViewMoreText>
-        </View>
-      </View>
-    );
-  };
+  const tour = TOURS.find(item => item.id === tourId);
 
+  const location = tour.locations.find(
+    location => location.locationName === locName
+  );
+  
   return (
-    <FlatList
-      keyExtractor={(item, idx) => item.id}
-      data={TOURS}
-      renderItem={renderListItem}
-      numColumns={1}
-    />
+    <View>
+      <Image style={styles.image} source={{ uri: location.image }} />
+      <LocationHeader style={styles.header} place_id={place_id} menu={menu} />
+      <View style={styles.summary}>
+        <ViewMoreText
+          numberOfLines={17}
+          renderViewMore={this.renderViewMore}
+          renderViewLess={this.renderViewLess}
+          textStyle={{}}
+        >
+          <Text style={styles.text}>{location.summary}</Text>
+        </ViewMoreText>
+      </View>
+    </View>
   );
 };
 
@@ -103,6 +93,9 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: 10,
     marginLeft: 6
+  },
+  header: {
+    marginTop: 50
   }
 });
 

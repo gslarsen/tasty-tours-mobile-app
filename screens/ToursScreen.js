@@ -19,7 +19,6 @@ const ToursScreen = props => {
   const availableItems = TOURS.filter(item => item.cityId === cityId);
 
   const renderListItem = data => {
-    console.log('DATA item:', data.item.image)
     let image = data.item.image;
     
       return (

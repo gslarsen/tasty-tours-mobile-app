@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,7 +6,8 @@ import {
   FlatList,
   TouchableOpacity,
   Platform,
-  ImageBackground
+  ImageBackground,
+  ActivityIndicator
 } from "react-native";
 
 import { TOURS } from "../data/data";
@@ -14,54 +15,67 @@ import Colors from "../constants/Colors";
 
 const ToursScreen = props => {
   // console.log('PROPS :', props.navigation.getParam('id'));
-
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState([]);
   const cityId = props.navigation.getParam("id");
-  const availableItems = TOURS.filter(item => item.cityId === cityId);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/tours")
+      .then(response => response.json())
+      .then(responseJson => {
+        // console.log(responseJson);
+        setIsLoading(false);
+        setData(responseJson.tours.filter(item => item.cityId === cityId));
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
 
   const renderListItem = data => {
     let image = data.item.image;
-    
-      return (
-        <View key={data.item.id}style={styles.tourItem}>
-          <TouchableOpacity
-            onPress={() =>
-              props.navigation.navigate("TourDetails", {
-                id: data.item.id,
-                name: data.item.name
-              })
-            }
-          >
-            <View>
-              <View style={{ ...styles.tourRow, ...styles.tourHeader }}>
-                <ImageBackground
-                  source={{uri: image}}
-                  style={styles.image}
-                >
-                  <View style={styles.titleContainer}>
-                    <Text style={styles.title}>{data.item.name}</Text>
-                  </View>
-                </ImageBackground>
-              </View>
-              <View style={{ ...styles.tourRow, ...styles.tourDetail }}>
-                <Text>{data.item.description}</Text>
-              </View>
+
+    return (
+      <View key={data.item._id} style={styles.tourItem}>
+        <TouchableOpacity
+          onPress={() =>
+            props.navigation.navigate("TourDetails", {
+              id: data.item._id,
+              name: data.item.name
+            })
+          }
+        >
+          <View>
+            <View style={{ ...styles.tourRow, ...styles.tourHeader }}>
+              <ImageBackground source={{ uri: image }} style={styles.image}>
+                <View style={styles.titleContainer}>
+                  <Text style={styles.title}>{data.item.name}</Text>
+                </View>
+              </ImageBackground>
             </View>
-          </TouchableOpacity>
-        </View>
-      );
-  
+            <View style={{ ...styles.tourRow, ...styles.tourDetail }}>
+              <Text>{data.item.description}</Text>
+            </View>
+          </View>
+        </TouchableOpacity>
+      </View>
+    );
   };
 
-  return (
-    <View style={styles.list}>
-      <FlatList
-        keyExtractor={(item) => item.id}
-        data={availableItems}
-        renderItem={renderListItem}
-        numColumns={1}
-      />
-    </View>
-  );
+  if (isLoading) {
+    return <ActivityIndicator />;
+  } else {
+    return (
+      <View style={styles.list}>
+        <FlatList
+          keyExtractor={item => item._id}
+          data={data}
+          renderItem={renderListItem}
+          numColumns={1}
+        />
+      </View>
+    );
+  }
 };
 
 ToursScreen.navigationOptions = navData => {
@@ -71,9 +85,9 @@ ToursScreen.navigationOptions = navData => {
   return {
     headerTitle: `${cityName.match(/^(.+?),/)[1]} Tours`,
     headerStyle: {
-      backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : ''
+      backgroundColor: Platform.OS === "android" ? Colors.primaryColor : ""
     },
-    headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor
+    headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor
   };
 };
 
@@ -117,8 +131,8 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     padding: 15
   }
 });

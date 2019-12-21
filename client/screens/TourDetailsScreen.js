@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -7,93 +7,131 @@ import {
   TouchableOpacity,
   Platform,
   ImageBackground,
-  Button
+  ActivityIndicator
 } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import HeaderButton from "../components/HeaderButton";
-import { TOURS } from "../data/data";
 import Colors from "../constants/Colors";
 import MapHeader from "../components/MapHeader";
 
 const TourDetailsScreen = props => {
   // console.log('PROPS :', props.navigation.getParam('id'));
+  const [isLoading, setIsLoading] = useState(true);
+  const [tour, setTour] = useState([]);
+  const [initialLocCoords, setCoords] = useState({});
+  const [tourLocations, setTourLocations] = useState([]);
 
   const tourId = props.navigation.getParam("id");
   const locName = props.navigation.getParam("name");
-  const tour = TOURS.find(item => item.id === tourId);
-  const initialLocCoords = tour.locations[0].coordinates;
+  // const tour = TOURS.find(item => item.id === tourId);
+  // const initialLocCoords = tour.locations[0].coordinates;
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/tours")
+      .then(response => response.json())
+      .then(responseJson => {
+        // console.log(responseJson);
+        
+        setTour(responseJson.tours.find(item => item._id === tourId));
+        
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/locations")
+      .then(response => response.json())
+      .then(responseJson => {
+        let locations = responseJson.locations.filter(item => item.tourId.includes(tourId));
+        
+        setTourLocations(locations);
+        // console.log('TOUR LOCATIONS:', tourLocations)
+        setCoords(locations[0].coordinates);
+        setIsLoading(false);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
 
   const renderListItem = data => {
-    
-      return (
-        <View key={data.item.locationName} style={styles.tourItem}>
-          <TouchableOpacity
-            onPress={() =>
-              props.navigation.navigate("LocationDetails", {
-                tourId,
-                name: data.item.locationName,
-                place_id: data.item.place_id,
-                menu: data.item.menu
-              })
-            }
-          >
+
+    return (
+      <View key={data.item.locationName} style={styles.tourItem}>
+        <TouchableOpacity
+          onPress={() =>
+            props.navigation.navigate("LocationDetails", {
+              tourId,
+              name: data.item.locationName,
+              place_id: data.item.place_id,
+              menu: data.item.menu,
+              summary: data.item.summary,
+              image: data.item.image
+            })
+          }
+        >
+          <View>
+            <View style={{ ...styles.tourRow, ...styles.tourHeader }}>
+              <ImageBackground
+                source={{ uri: data.item.image }}
+                style={styles.image}
+              >
+                <View style={styles.titleContainer}>
+                  <Text style={styles.title}>{data.item.locationName}</Text>
+                </View>
+              </ImageBackground>
+            </View>
             <View>
-              <View style={{ ...styles.tourRow, ...styles.tourHeader }}>
-                <ImageBackground
-                  source={{ uri: data.item.image }}
-                  style={styles.image}
-                >
-                  <View style={styles.titleContainer}>
-                    <Text style={styles.title}>{data.item.locationName}</Text>
-                  </View>
-                </ImageBackground>
+              <View style={{ ...styles.tourRow, ...styles.tourDetail }}>
+                <Text>{data.item.address.match(/^(.+?),/)[1]}</Text>
+                <Text>{data.item.phone}</Text>
               </View>
-              <View>
-                <View style={{ ...styles.tourRow, ...styles.tourDetail }}>
-                  <Text>{data.item.address.match(/^(.+?),/)[1]}</Text>
-                  <Text>{data.item.phone}</Text>
-                </View>
-                <View
-                  style={{
-                    ...styles.tourRow,
-                    paddingHorizontal: 10,
-                    textAlign: "justify"
-                  }}
-                >
-                  <Text numberOfLines={4}>{data.item.summary}</Text>
-                  <Text></Text>
-                </View>
+              <View
+                style={{
+                  ...styles.tourRow,
+                  paddingHorizontal: 10,
+                  textAlign: "justify"
+                }}
+              >
+                <Text numberOfLines={4}>{data.item.summary}</Text>
+                <Text></Text>
               </View>
             </View>
-          </TouchableOpacity>
-        </View>
-      );
-
+          </View>
+        </TouchableOpacity>
+      </View>
+    );
   };
 
-  return (
-    <View style={styles.list}>
-      <FlatList
-        keyExtractor={(item, idx) => item.place_id }
-        data={tour.locations}
-        renderItem={renderListItem}
-        numColumns={1}
-        ListHeaderComponent={
-          <MapHeader
-            style={styles.map}
-            location={initialLocCoords}
-            onPress={() => {
-              props.navigation.navigate("MapDynamic", {
-                tourId,
-                name: locName
-              });
-            }}
-          />
-        }
-      />
-    </View>
-  );
+  if (isLoading) {
+    return <ActivityIndicator />;
+  } else {
+    return (
+      <View style={styles.list}>
+        <FlatList
+          keyExtractor={(item, idx) => item._id}
+          data={tourLocations}
+          renderItem={renderListItem}
+          numColumns={1}
+          ListHeaderComponent={
+            <MapHeader
+              style={styles.map}
+              location={initialLocCoords}
+              onPress={() => {
+                props.navigation.navigate("MapDynamic", {
+                  tourId,
+                  name: locName
+                });
+              }}
+            />
+          }
+        />
+      </View>
+    );
+  }
 };
 
 TourDetailsScreen.navigationOptions = navData => {
@@ -111,7 +149,7 @@ TourDetailsScreen.navigationOptions = navData => {
           title="Home"
           iconName="md-home"
           onPress={() => {
-            navData.navigation.navigate('Cities');
+            navData.navigation.navigate("Cities");
           }}
         />
       </HeaderButtons>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,20 +6,35 @@ import {
   FlatList,
   TouchableOpacity,
   Platform,
-  ImageBackground
+  ImageBackground,
+  ActivityIndicator
 } from "react-native";
 
-import { CITIES } from "../data/data";
 import Colors from "../constants/Colors";
 
 const CitiesScreen = props => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/cities")
+      .then(response => response.json())
+      .then(responseJson => {
+        setIsLoading(false);
+        setData(responseJson.cities);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
+
   const renderListItem = data => {
     return (
       <TouchableOpacity
         style={styles.listItem}
         onPress={() =>
           props.navigation.navigate("Tours", {
-            id: data.item.id,
+            id: data.item._id,
             name: data.item.name
           })
         }
@@ -31,37 +46,41 @@ const CitiesScreen = props => {
     );
   };
 
-  return (
-    <View style={{ flex: 1 }}>
-      <View>
-        <ImageBackground
-          style={styles.image}
-          source={require("../assets/hero.jpeg")}
-        >
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>Tasty Tours</Text>
-          </View>
-        </ImageBackground>
+  if (isLoading) {
+    return <ActivityIndicator />;
+  } else {
+    return (
+      <View style={{ flex: 1 }}>
+        <View>
+          <ImageBackground
+            style={styles.image}
+            source={require("../assets/hero.jpeg")}
+          >
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>Tasty Tours</Text>
+            </View>
+          </ImageBackground>
+        </View>
+        <FlatList
+          keyExtractor={(item, idx) => item._id}
+          data={data}
+          renderItem={renderListItem}
+          numColumns={1}
+        />
       </View>
-      <FlatList
-        keyExtractor={(item, idx) => item.id}
-        data={CITIES}
-        renderItem={renderListItem}
-        numColumns={1}
-      />
-    </View>
-  );
+    );
+  }
 };
 
 CitiesScreen.navigationOptions = {
   headerTitle: "TASTY TOURS",
   headerStyle: {
-    backgroundColor: Platform.OS === "android" ? Colors.primaryColor : "",
+    backgroundColor: Platform.OS === "android" ? Colors.primaryColor : ""
   },
   headerTitleStyle: {
     fontFamily: "open-sans-bold",
-    textAlign: 'center'
-  },  
+    textAlign: "center"
+  },
   headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor
 };
 

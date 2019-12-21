@@ -12,7 +12,6 @@ import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import LocationHeader from "../components/LocationHeader";
 import HeaderButton from "../components/HeaderButton";
-import { TOURS } from "../data/data";
 import Colors from "../constants/Colors";
 
 const LocationDetailsScreen = props => {
@@ -20,6 +19,8 @@ const LocationDetailsScreen = props => {
   const locName = props.navigation.getParam("name");
   const place_id = props.navigation.getParam("place_id");
   const menu = props.navigation.getParam("menu");
+  const summary = props.navigation.getParam("summary");
+  const image = props.navigation.getParam("image");
 
   const renderViewMore = onPress => {
     return <Text onPress={onPress}>View more</Text>;
@@ -28,17 +29,11 @@ const LocationDetailsScreen = props => {
   const renderViewLess = onPress => {
     return <Text onPress={onPress}>View less</Text>;
   };
-
-  const tour = TOURS.find(item => item.id === tourId);
-
-  const location = tour.locations.find(
-    location => location.locationName === locName
-  );
   
   return (
     <View>
     <ScrollView style={styles.summary}>
-      <Image style={styles.image} source={{ uri: location.image }} />
+      <Image style={styles.image} source={{ uri: image }} />
       
       <LocationHeader style={styles.header} place_id={place_id} menu={menu} />
       
@@ -48,7 +43,7 @@ const LocationDetailsScreen = props => {
           renderViewLess={this.renderViewLess}
           textStyle={{}}
         >
-          <Text style={styles.text}>{location.summary}</Text>
+          <Text style={styles.text}>{summary}</Text>
         </ViewMoreText>
         <View><Text style={{color: 'white'}}>-</Text></View>
       </ScrollView>

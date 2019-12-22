@@ -52,7 +52,6 @@ const LocationDetailsScreen = props => {
 };
 
 LocationDetailsScreen.navigationOptions = navData => {
-  // console.log('NAV OPTIONS:', navData.navigation.getParam('name'))
   const locName = navData.navigation.getParam("name");
 
   return {

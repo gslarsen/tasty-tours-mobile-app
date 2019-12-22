@@ -10,11 +10,9 @@ import {
   ActivityIndicator
 } from "react-native";
 
-import { TOURS } from "../data/data";
 import Colors from "../constants/Colors";
 
 const ToursScreen = props => {
-  // console.log('PROPS :', props.navigation.getParam('id'));
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
   const cityId = props.navigation.getParam("id");
@@ -23,7 +21,6 @@ const ToursScreen = props => {
     fetch("http://127.0.0.1:8000/tours")
       .then(response => response.json())
       .then(responseJson => {
-        // console.log(responseJson);
         setIsLoading(false);
         setData(responseJson.tours.filter(item => item.cityId === cityId));
       })
@@ -79,7 +76,6 @@ const ToursScreen = props => {
 };
 
 ToursScreen.navigationOptions = navData => {
-  // console.log('NAV OPTIONS:', navData.navigation.getParam('name'))
   const cityName = navData.navigation.getParam("name");
 
   return {

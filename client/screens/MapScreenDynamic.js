@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { View, Text, Dimensions, StyleSheet, Platform, Alert } from "react-native";
-import MapView, { Marker, Callout } from "react-native-maps";
+import MapView from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import HeaderButton from "../components/HeaderButton";
 import ENV from "../env";
-import { TOURS } from "../data/data";
 import Colors from "../constants/Colors";
 
 const { width, height } = Dimensions.get("window");
@@ -17,11 +16,8 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const GOOGLE_MAPS_APIKEY = ENV.googleApiKey;
 
 const MapScreenDynamic = props => {
-  const tourId = props.navigation.getParam("tourId");
   const locName = props.navigation.getParam("name");
-
-  const tour = TOURS.find(tour => tour.id === tourId);
-  const tourLocations = tour.locations;
+  const tourLocations = props.navigation.getParam("tourLocations");
   const locationCoords = tourLocations.map(location => location.coordinates);
 
   const state = {
@@ -84,7 +80,7 @@ const MapScreenDynamic = props => {
           optimizeWaypoints={true}
           onStart={params => {
             console.log(
-              `Started routing between "${params.origin}" and "${params.destination}"`
+              `Routing between "${params.origin}" and "${params.destination}"`
             );
           }}
           onReady={result => {
@@ -120,7 +116,6 @@ const MapScreenDynamic = props => {
 };
 
 MapScreenDynamic.navigationOptions = navData => {
-  // console.log('NAV OPTIONS:', navData.navigation.getParam('name'))
   const tourName = navData.navigation.getParam("name");
 
   return {

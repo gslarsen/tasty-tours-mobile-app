@@ -16,7 +16,6 @@ import Colors from "../constants/Colors";
 import MapHeader from "../components/MapHeader";
 
 const TourDetailsScreen = props => {
-  // console.log('PROPS :', props.navigation.getParam('id'));
   const [isLoading, setIsLoading] = useState(true);
   const [tour, setTour] = useState([]);
   const [initialLocCoords, setCoords] = useState({});
@@ -30,11 +29,8 @@ const TourDetailsScreen = props => {
   useEffect(() => {
     fetch("http://127.0.0.1:8000/tours")
       .then(response => response.json())
-      .then(responseJson => {
-        // console.log(responseJson);
-        
+      .then(responseJson => {        
         setTour(responseJson.tours.find(item => item._id === tourId));
-        
       })
       .catch(error => {
         console.error(error);
@@ -48,7 +44,6 @@ const TourDetailsScreen = props => {
         let locations = responseJson.locations.filter(item => item.tourId.includes(tourId));
         
         setTourLocations(locations);
-        // console.log('TOUR LOCATIONS:', tourLocations)
         setCoords(locations[0].coordinates);
         setIsLoading(false);
       })
@@ -122,8 +117,8 @@ const TourDetailsScreen = props => {
               location={initialLocCoords}
               onPress={() => {
                 props.navigation.navigate("MapDynamic", {
-                  tourId,
-                  name: locName
+                  name: locName,
+                  tourLocations
                 });
               }}
             />

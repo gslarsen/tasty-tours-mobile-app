@@ -3,7 +3,7 @@ const City = require("../models/city");
 const Tour = require("../models/tour");
 const Location = require("../models/location");
 
-// INITIAL DATA
+// INITIAL DATA - RALEIGH TOUR 1
 // const raleigh = new City({ name: "Raleigh, NC  US" });
 // const durham = new City({ name: "Durham, NC  US" });
 // const chapelHill = new City({ name: "Chapel Hill, NC  US" });
@@ -12,16 +12,17 @@ const Location = require("../models/location");
 // durham.save();
 // chapelHill.save();
 
-// const foodies = new Tour({
-//   cityId: raleigh._id,
+// const dinnerAndDrinks = new Tour({
+//   cityId: '5dfe9fbb6b86c13563744ac5',
 //   name: "Foodies!",
 //   image:
 //     "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,h_200,q_85,w_400/v1/clients/raleigh/tt_head_7_22_19_bdf716ae-da6f-4980-8e36-b283f11ee59f.jpg",
 //   description:
-//     "This tour is a fun and fantastic way to get to know the heart of downtown. Delicious savory and sweet tastings at unique, locally-owned restaurants, food shops, and food halls show off artisan preparations of regional dishes and bites.",
+//     "This tour is a fun and fantastic way to get to know the heart of downtown. Delicious savory and sweet tastings at unique, locally-owned restaurants, food shops, and food halls show off artisan preparations of regional dishes and bites.,
 //   locations: []
 // });
 
+// PICK NEW LOCATIONS NEXT!!
 // const mofu = new Location({
 //   place_id: "ChIJlcDv8XJfrIkRomNGWepQfjw", 
 //   tourId: [foodies._id],
@@ -92,6 +93,8 @@ const Location = require("../models/location");
 // foodies.locations.push(mofu, greenLight, stRoche, bittersweet);
 // foodies.save();
 
+// RALEIGH TOUR TWO
+
 
 router.get("/cities", (req, res, next) => {
   City.find({}, (err, data) => {
@@ -116,106 +119,5 @@ router.get("/locations", (req, res, next) => {
     });
   });
 });
-
-// // Returns a specific product by its id
-// router.get("/products/:product", (req, res, next) => {
-//   const productId = req.params.product;
-
-//   // find product in db
-//   Product.findById(productId, (err, prod) => {
-//     if (err) console.log(err);
-//     else {
-//       res.send(prod);
-//     }
-//   });
-// });
-
-// // Returns ALL the reviews, but limited to 40 at a time. Reviews collection exists as this is using references and population methodology
-// router.get("/reviews", (req, res, next) => {
-//   const perPage = 40;
-
-//   // return the first page by default
-//   const page = req.query.page || 1;
-
-//   Review.find()
-//     .skip(perPage * (page - 1))
-//     .limit(perPage)
-//     .exec((err, reviews) => {
-//       Product.count().exec((err, count) => {
-//         if (err) console.log(err);
-//         else res.send(reviews);
-//       });
-//     });
-// });
-
-// // Creates a new product in the database
-// router.post("/products", (req, res, next) => {
-//   let newProduct = new Product();
-
-//   newProduct.category = req.body.category;
-//   newProduct.name = req.body.name;
-//   newProduct.price = req.body.price;
-//   newProduct.image = req.body.image;
-//   newProduct.reviews = [];
-
-//   newProduct.save((err, prod) => {
-//     if (err) console.log(err);
-//     res.send(prod);
-//   });
-// });
-
-// // Creates a new review in the database by adding it to the correct product's reviews array
-// router.post("/:product/reviews", (req, res, next) => {
-//   const productId = req.params.product;
-
-//   // check to see if product is in db
-//   Product.findById(productId, (err, product) => {
-//     console.log("Product is:", product);
-//     if (err) console.log(err);
-
-//     // else create the new review
-//     const userName = req.body.userName;
-//     const text = req.body.text;
-
-//     const newReview = new Review({
-//       userName,
-//       text,
-//       product: productId
-//     });
-
-//     // save it
-//     newReview.save(function(err, review) {
-//       if (err) console.log(err);
-//       console.log("Review added:", JSON.stringify(review));
-//     });
-
-//     // add to product reviews, save the product and return it to client
-//     product.reviews.push(newReview);
-//     product.save((err, prod) => {
-//       if (err) console.log(err);
-//       res.send(prod);
-//     });
-//   });
-// });
-
-// // Deletes a product by id
-// router.delete("/products/:product", (req, res, next) => {
-//   const productId = req.params.product;
-
-//   Product.findByIdAndDelete(productId, (err, result) => {
-//     if (err) console.log(err);
-//     res.send(result);
-//   });
-// });
-
-// // Deletes a review by id
-// router.delete("/reviews/:review", (req, res, next) => {
-//   const reviewId = req.params.review;
-
-//   Review.findByIdAndDelete(reviewId, (err, result) => {
-//     if (err) console.log(err);
-//     res.send(result);
-//   });
-// });
 
 module.exports = router;

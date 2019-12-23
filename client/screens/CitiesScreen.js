@@ -11,13 +11,14 @@ import {
 } from "react-native";
 
 import Colors from "../constants/Colors";
+import ENV from "../env";
 
 const CitiesScreen = props => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/cities")
+    fetch(`${ENV.hostURL}/cities`)
       .then(response => response.json())
       .then(responseJson => {
         setIsLoading(false);

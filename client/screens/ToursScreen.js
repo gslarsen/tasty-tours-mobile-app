@@ -11,6 +11,7 @@ import {
 } from "react-native";
 
 import Colors from "../constants/Colors";
+import ENV from "../env";
 
 const ToursScreen = props => {
   const [isLoading, setIsLoading] = useState(true);
@@ -18,7 +19,7 @@ const ToursScreen = props => {
   const cityId = props.navigation.getParam("id");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/tours")
+    fetch(`${ENV.hostURL}/tours`)
       .then(response => response.json())
       .then(responseJson => {
         setIsLoading(false);

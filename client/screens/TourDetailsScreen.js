@@ -14,6 +14,7 @@ import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
 import Colors from "../constants/Colors";
 import MapHeader from "../components/MapHeader";
+import ENV from "../env";
 
 const TourDetailsScreen = props => {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,11 +24,9 @@ const TourDetailsScreen = props => {
 
   const tourId = props.navigation.getParam("id");
   const locName = props.navigation.getParam("name");
-  // const tour = TOURS.find(item => item.id === tourId);
-  // const initialLocCoords = tour.locations[0].coordinates;
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/tours")
+    fetch(`${ENV.hostURL}/tours`)
       .then(response => response.json())
       .then(responseJson => {        
         setTour(responseJson.tours.find(item => item._id === tourId));
@@ -38,7 +37,7 @@ const TourDetailsScreen = props => {
   }, []);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/locations")
+    fetch(`${ENV.hostURL}/locations`)
       .then(response => response.json())
       .then(responseJson => {
         let locations = responseJson.locations.filter(item => item.tourId.includes(tourId));

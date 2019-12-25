@@ -2,8 +2,12 @@
   "name": "tasty-tours",
   "version": "1.0.0",
   "description": "Food tours curated by local guides",
+  "engines": {
+    "node": "12.8.0",
+    "npm": "6.x"
+  },
   "scripts": {
-    "start": "node server.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -18,3 +22,4 @@
     "mongoose": "^5.7.8"
   }
 }
+

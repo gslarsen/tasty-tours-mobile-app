@@ -3,7 +3,7 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerNgrokUrl": "https://xk-vur.glarsen.client.exp.direct",
+  "packagerNgrokUrl": "https://packager.xk-vur.glarsen.client.exp.direct",
+  "ngrokPid": 38734
 }

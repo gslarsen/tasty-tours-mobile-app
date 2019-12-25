@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "RN Guide",
-    "slug": "rn-complete-guide",
+    "name": "tasty-tours",
+    "slug": "tasty-tours",
+    "description": "A mobile app of Food Tasting Tours curated by local city guides.  For android devices, download the applicable expo client from the menu below, then scan the QR code to open it. For ios, unfortunately, Apple's requirements no longer allow for sharing a project via this method.",
     "privacy": "public",
     "sdkVersion": "34.0.0",
     "platforms": [
@@ -11,7 +12,7 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

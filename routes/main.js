@@ -13,86 +13,86 @@ const Location = require("../models/location");
 // chapelHill.save();
 
 // 
-// const foodies = new Tour({
-//   cityId: '5dfe9fbb6b86c13563744ac6',
-//   name: "Tasting & Drinks",
-//   image:
-//     "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,h_677,q_85,w_1280/v1/clients/raleigh/33168110854_2b07300105_o_571b7345-cc69-4d3e-ab0e-05e3a8eb83c9.jpg",
-//   description:
-//     "The restaurants featured on this tour are as farm-to-table as you will find and are all located in funky, rehabbed historic buildings. Chefs prepare substantial tour tastings all paired with small drinks, including beer, wine and cocktails.",
-//   locations: []
-// });
+const foodies = new Tour({
+  cityId: '5dfe9fbb6b86c13563744ac6',
+  name: "Downtown Durham",
+  image:
+    "https://cdn.travelpulse.com/images/99999999-9999-9999-9999-999999999999/9cd5e6a5-08e4-7b89-2de9-6394f81848b0/630x355.jpg",
+  description:
+    "The restaurants featured on this tour are a great way to experience downtown Durham, and they are local favorites with something for everyone.  There are four locations with opportunities for wine and beer here and there.",
+  locations: []
+});
 
 // // PICK NEW LOCATIONS NEXT!!
-// const mateo = new Location({
-//   place_id: "ChIJqbMjoHLkrIkRU_pHV3Z9LMM", 
-//   tourId: [foodies._id],
-//   locationName: "Mateo Bar de Tapas",
-//   address: "109 W Chapel Hill St, Durham, NC 27701",
-//   coordinates: { latitude: 35.9967559, longitude: -78.9048161 },
-//   phone: "(919) 530-8700",
-//   image:
-//     "https://lh5.googleusercontent.com/p/AF1QipMRKUq7NmsW6W-8d-iLHb_WctHExBDuJppBG0C_=w408-h272-k-no",
-//   menu: "http://mateotapas.com/menus.htm",
-//   summary:
-//     "MATEO BAR de TAPAS is the first solo venture from chef Matthew Kelly of Vin Rouge, housed in the old Book Exchange building in the heart of downtown Durham. Featuring a menu that blends the flavors of Spain with beloved ingredients and dishes of the South. We offer a casual, yet refined, menu of Spanish small plates with a Southern inflection. Accompanying the food is a robust Spanish wine list as well as one of the largest sherry offerings in the country."
-// });
+const copa = new Location({
+  place_id: "ChIJ__-_523krIkROx6yP0AZZlo", 
+  tourId: [foodies._id],
+  locationName: "COPA",
+  address: "107 W Main St, Durham, NC 27701",
+  coordinates: { latitude: 35.9950232, longitude: -78.9011522 },
+  phone: "(919) 973-0111",
+  image:
+    "https://lh5.googleusercontent.com/p/AF1QipMh9F2vskP-G_yH0v2T23MAraBQAaHztBW3hQp-=w408-h272-k-no",
+  menu: "https://copadurham.com/menus",
+  summary:
+    "At COPA, we're passionate about cultivating relationships from the soil to the table.  This means that we partner with organic farmers who care more about the quality of their soil than the ease of their harvest. We partner with farmers who practice healthy rotation of their animals on pasture, nurturing the soil as they go. This also means that we choose to take the long route at our own farm, Terra Sacra, building up the soil so that we can provide fresh, nutritious produce.\n\nOur philosphy also means that we don't just look for the best ingredients, but we also strive to build meaningful relationships with our farmers and local providers, fostering a dialogue that encourages each of us to perform to the highest standard. And we listen, too, paying attention to the needs of our vendors and seeking out new forms of partnership that will help them in their sustainability efforts. This could mean, for example, looking for a way to help a farmer sell an edible cover crop that is necessary for healthy soil but difficult to market. Or it could mean choosing to use smaller, heritage breeds of animals such as rabbit, poultry, lambs, and pigs, that are more sustainable for small farmers and increase the genetic diversity of livestock.\n\nCultivating relationships from the soil to the table also means that we care about our team members. We choose to pay a living wage, provide benefits, and offer a safe, nurturing work environment. This means that we are all committed to treating one another with respect and kindness.\n\nFinally, some of the most meaningful and special relationships that we cultivate are with you, our guests. From our early days at Old Havana through today, we have formed close friendships with many of our guests. We have seen some of them marry and have their first child. To our great delight, some of those children have cut their teeth on our black beans and sweet maduros. \n\nWhen you dine with us at COPA, you aren't just enjoying some of the nation's only farm-to-table Cuban food—you're engaging in a journey that begins in the earth itself, that turns strangers into friends, and that, almost magically, transports you to a time and place long forgotten, a time where people slowed down to savor flavors, to share face-to-face with loved ones, to nurture body and spirit."
+});
 
-// const luna = new Location({
-//   place_id: "ChIJP59o423krIkRSMWfvuK7-GY",
-//   tourId: [foodies._id],
-//   locationName: "Luna",
-//   address: "112 W Main St, Durham, NC 27701",
-//   coordinates: { latitude: 35.9954828, longitude: -78.9008417 },
-//   phone: "(984) 439-8702",
-//   image:
-//     "https://lh5.googleusercontent.com/p/AF1QipN_90dOxWgrhXSyrl_BkF2E1oJKkshr7Fzk5Enw=w493-h240-k-no",
+const bull = new Location({
+  place_id: "ChIJh3eRD27krIkRpG-tTJnXAf8",
+  tourId: [foodies._id],
+  locationName: "Bull City Burger and Brewery",
+  address: "107 E Parrish St, Durham, NC 27701",
+  coordinates: { latitude: 35.9954939, longitude: -78.8997764 },
+  phone: "(919) 680-2333",
+  image:
+    "https://lh5.googleusercontent.com/p/AF1QipOn3-ud3sd8rhHkz-Y7-mol7YpJl49rk8mFFrbj=w408-h408-k-no",
 
-//   menu: "http://lunarotisserie.com/menu.html",
+  menu: "http://www.bullcityburgerandbrewery.com/food.html",
 
-//   summary:
-//     "Luna’s chef and owner, Shawn Stokes , has over 15 years experience in the restaurant industry. A 1998 graduate of Johnson & Wales University’s culinary arts program, he has worked in numerous successful establishments up and down the East Coast, including the Ritz Carlton in Naples, FL, Chillingsworth in Cape Cod, MA, Hank’s and Peninsula Grille in Charleston, SC, and Komi in Washington, DC. During his time in the industry, he served in front-of-house and back-of-house roles, gaining a well-rounded understanding of restaurant operations and management.\n\nIn 2005, Shawn left the restaurant world to pursue a career in international development. He spent the next 10 years working in different parts of the world, gaining experience with organizations such as the US Peace Corps, USAID, UNICEF, CARE International, and Catholic Relief Services. Unable to stray too far from his culinary background, much of his work centered on improving global food systems. Most often, he lived and worked in Latin America, where he collaborated with coffee growers in Ecuador, subsistence farmers in El Salvador, shrimp fishermen in Mexico, and cattle ranchers in Brazil."
-// });
+  summary:
+    "Bull City Burger and Brewery is a locally owned, independent restaurant and craft brewery located at 107 East Parrish Street in downtown Durham, NC. We opened in March 2011. The restaurant serves lunch and dinner 7 days per week with approximately 90 seats inside plus 50 seats of outside year round patio dining. We offer counter style service and a family friendly experience with a children’s play area, as well as a semi-private meeting room for business gatherings, events and presentations all within full view of our own brewery.\n\nThere are Ten Things you need to know about us.\n\nThe restaurant is very much “farm-to-fork,” working closely with North Carolina pasture-raised beef farmers supplying beef with no added hormones and antibiotic-free, that we grind daily to make our hamburgers and all-beef hotdogs.  We work with other farmers growing vegetables such as tomatoes, cucumbers for pickles, and lettuce. The menu is streamlined with nearly everything produced on-site including house made buns, sauerkraut and bacon. We use no artificial sweeteners, no high fructose corn syrup, and no hydrogenated oils.  We like to say we are like fine dining in a burger joint.  We make the mustard, the slaw, the pickles, the mayo, the aioli, the hotdogs, the relish, the...\n\nCentral to Bull City Burger and Brewery’s core values is sustainability; our attempt is to operate while leaving the smallest energy footprint possible.  Our long term goal is to become part of a cycle of energy with the restaurant playing an integral role in the farms we source. Grain left over from the brewing process feeds locally farmed pigs and chickens that provide pork bellies to make our bacon and eggs for our over easy burger, and the fryer oil becomes bio-diesel to fuel vehicles. We are also recycling 99% of our food waste to feed pigs on a local farm, putting nearly zero food waste into landfills."
+});
 
-// const kingfisher = new Location({
-//   place_id: "ChIJ_ZNX85zlrIkRMfygBL0t-Xc",
-//   tourId: [foodies._id],
-//   locationName: "Kingfisher",
-//   address: "321 E Chapel Hill St, Durham, NC 27701",
-//   coordinates: { latitude: 35.9971941, longitude: -78.9009655 },
-//   phone: "(919) 908-9429",
-//   image:
-//     "https://images.squarespace-cdn.com/content/v1/5ae749d7c258b42ea807d269/1575746017257-ML5L860NH4ACF7CAFV77/ke17ZwdGBToddI8pDm48kLkXF2pIyv_F2eUT9F60jBl7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0iyqMbMesKd95J-X4EagrgU9L3Sa3U8cogeb0tjXbfawd0urKshkc5MgdBeJmALQKw/Kingfisher_Nov19_Lg_File-72.jpg?format=2500w",
+const pizza = new Location({
+  place_id: "ChIJmRWKh3LkrIkRUVpp9W-ENqY",
+  tourId: [foodies._id],
+  locationName: "Pizzeria Toro",
+  address: "105 W Chapel Hill St, Durham, NC 27701",
+  coordinates: { latitude: 35.9971175, longitude: -78.9036011 },
+  phone: "(919) 908-6936",
+  image:
+    "https://lh5.googleusercontent.com/p/AF1QipMfewqmgzlJKApMVoQ0fhUYSFFKrI-d1vOyiGeA=w408-h306-k-no",
 
-//   menu: "https://www.kingfisherdurham.com/",
+  menu: "http://pizzeriatoro.com/toro_dinner.pdf",
 
-//   summary:
-//     "Ground-to-Glass Cocktails & Snacks in an Artful Basement.  For the duo behind Kingfisher Bar, innovative, locally inspired drinks are only part of the process.\n\nI think people like that feeling of a personal touch, that someone took the time to really think about the guest experience. I like providing a little bit of a surprise and delight for people when they discover all the different details everywhere,” says Michelle Vanderwalker. She and husband, Sean Umstead, opened the cocktail den in downtown Durham, North Carolina, this past summer. The couple built most of the bar’s furniture and decor, by hand, with the help of family and friends.\n\nVanderwalker and Umstead craft drinks with a meticulous focus on unique combinations made from sustainable, fresh ingredients; they put the same care and attention to detail in styling the underground bar space, too. Kingfisher’s design is intimate, and the co-owners aesthetic—and Vanderwalker’s talent as a ceramicist and visual artist—shines throughout. Handmade wooden tables and booths welcome guests into the bar, a line of mushroom photos taken by Vanderwalker’s father brings whimsy to the space, Vanderwalker’s ceramic dishes are put to use as servingware, and an origami lamp made by the couple’s son lights up the space.\n\nPerhaps the crowning jewel of the space is the tile bar top, a glassy, watercolor maze of identical 2-inch hexagonal tiles. The project took Vanderwalker months to make by hand, and it’s now the focal point of the earthy, elegant basement. “It’s really great for me to see people enjoying it. It’s personal; I really wanted to make this a place where I wanted to be,” she says.\n\nKingfisher’s uber-personal design also has practical perks. By relying on their DIY skills—plus those of their friends—the couple avoided costs that could have easily taken them over budget. “My grandmother was always figuring out how to solve problems in an artistic way, and I came away with that,” Vanderwalker says.\n\nAnd their creativity is good for the earth, too. Umstead and Vanderwalker often use surplus ingredients from local farmers in the cocktails; it’s all part of an effort to build a respectful, symbiotic relationship with community growers. Their design process is similar.\n\nVanderwalker picked up supplies for the bar at a Durham scrap exchange, and the tables and booths were built by a carpenter friend from the remains of an old barn in Maine. “It’s a philosophy of of really caring about where things come from and our community and making things from scratch, making something that is really special out of what we have,” Vanderwalker says."
-// });
+  summary:
+    "Buzzing, modern pizza parlor featuring wood-fired pies & a bar, plus an assortment of Italian wines."
+});
 
-// const virgil = new Location({
-//   place_id: "ChIJZ6Fe3m3krIkRFkAGozd8dKE",
-//   tourId: [foodies._id],
-//   locationName: "Bar Virgile",
-//   address: "105 S Mangum St, Durham, NC 27701",
-//   coordinates: { latitude: 35.99472, longitude: -78.9007883 },
-//   phone: "(919) 973-3000",
-//   image:
-//     "https://images.squarespace-cdn.com/content/v1/56798826e0327c3145ba5ab5/1505746741636-17YDGL350CIPSPH32MMG/ke17ZwdGBToddI8pDm48kKAwwdAfKsTlKsCcElEApLR7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UegTYNQkRo-Jk4EWsyBNhwKrKLo5CceA1-Tdpfgyxoog5ck0MD3_q0rY3jFJjjoLbQ/hillhoneck_cocktail_.jpg?format=2500w",
+const parlour = new Location({
+  place_id: "ChIJvR4VdHLkrIkRQAffX2_rw0w",
+  tourId: [foodies._id],
+  locationName: "The Parlour",
+  address: "117 Market St, Durham, NC 27701",
+  coordinates: { latitude: 35.9966254, longitude: -78.9022573 },
+  phone: "(919) 564-7999",
+  image:
+    "https://lh5.googleusercontent.com/p/AF1QipPtVQ2rnT3afKncHo4cs9UISRhXgpSJndwlfLXl=w450-h240-k-no",
 
-//   menu: "https://www.barvirgile.com/menu",
+  menu: "https://theparlour.co/menu/",
 
-//   summary:
-//     "Bar Virgile, located in the heart of downtown Durham, is a restaurant and bar specializing in craft and classic cocktails as well as an ever changing dinner and small plates menu. We source our products from the area's best purveyors, and we rely on a dynamic in-house team to execute a high quality, high standard operation. You'll always find friendly and knowledgeable service, a bustling atmosphere and thoughtful offerings--all of which have made us a landmark, Triangle area destination.\n\nBoasting one of the largest Spirits selections in the Triangle, Bar Virgile offers a wide variety of whiskey, gin, rum, agave and much more. Our focus is on craft and classic cocktails as well as seasonal offerings. We pride ourselves on technique, quality ingredients and warm hospitality. An ever changing beer and wine program rounds out our award winning bar and restaurant.\n\nExecutive Chef, Scott Howell, has teamed up with Kyle West, our Chef de Cuisine, to create a diverse and technique driven menu. You'll find poultry, meats, seafood, local vegetables, charcuterie and cheeses and much more. Our open kitchen allows the guests to experience, first hand, the energy of a very busy kitchen. We pride ourselves on quality and design with our offerings. From house made bread to scratch made desserts, we work tirelessly on creating dishes our guests love.\n\nYou can sit at the bar on our comfortable red bar stools or bring a group to enjoy one of our leather banquettes. All seats in the dining room and bar area are first-come, first-served.\n\nWe are conveniently located downtown near the Durham Performing Arts Center and the Carolina Theater. Many of our guests stop by for a drink or a bite to eat before and after the shows."
-// });
+  summary:
+    "The Parlour was founded by co-owners Yoni and Vanessa Mazuz (aka Mr. and Mrs. Parlour).\n\nWe make the best ice cream around, with the best ingredients. Vanessa started experimenting with ice cream many years ago, after we moved from Philadelphia so Yoni could attend graduate school at Duke. Coming from a city with such a strong ice cream history, we missed the easy access to high-quality handmade ice cream. Since sharing a scoop with friends is one of our favorite things to do, we began making ice cream at home to bring to friends and coworkers. Our hobby grew into a business in 2011, when we bought a used commercial ice cream maker, started making bigger batches at The Cookery, and served it all over the Triangle from our converted school bus. In 2012, we ran a Kickstarter campaign to raise money for our own kitchen, and in April of 2013 we opened our permanent location downtown, where we now employ 3 kitchen staff and a dozen scoopers.\n\nWe love being part of downtown Durham, where we operate right across from CCB Plaza, home of the iconic Major The Bull. We’ve been thrilled at the support we’ve gotten from neighboring businesses, community organizations, media, and of course customers. Tourists and locals alike keep us busy, with lines out the door all summer. In 2014 we announced our first expansion strategy—adding more space right where we are, for more seating, more production space, a bigger menu.\n\nOur flavors are inspired by the seasons, our favorite well-worn cookbooks, and our childhood ice cream memories (though we promise we will never ever make gummy bear ice cream.) We make our ice cream with 18% butterfat and the best quality ingredients we can get our hands on. We also make all our pastries and most of our toppings from scratch. We always offer vegan options, including fruit sorbets, creamy flavors made from coconut milk, and scratch-made vegan baked treats. We’re committed to paying our workers a living wage, giving back to our community, and creating happiness through ice cream."
+});
 
-// mateo.save();
-// luna.save();
-// kingfisher.save();
-// virgil.save();
+copa.save();
+bull.save();
+pizza.save();
+parlour.save();
 
-// foodies.locations.push(mateo, luna, kingfisher, virgil);
-// foodies.save();
+foodies.locations.push(copa, bull, pizza, parlour);
+foodies.save();
 
 
 router.get("/cities", (req, res, next) => {

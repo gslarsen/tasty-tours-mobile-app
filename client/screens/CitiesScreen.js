@@ -51,7 +51,7 @@ const CitiesScreen = props => {
     return <ActivityIndicator />;
   } else {
     return (
-      <View style={{ flex: 1 }}>
+      <View >
         <View>
           <ImageBackground
             style={styles.image}
@@ -103,13 +103,13 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   image: {
-    width: 400,
+    justifyContent: 'center',
+    width: '100%',
+    overflow: 'hidden',
     height: 200,
     marginTop: 10,
     marginBottom: 15,
-    marginLeft: 7,
-    borderRadius: 10,
-    justifyContent: "center"
+    alignItems: "center"
   },
   titleContainer: {
     backgroundColor: "rgba(0,0,0,0.2)",

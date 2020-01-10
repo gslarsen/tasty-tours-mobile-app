@@ -103,10 +103,10 @@ class LocationHeader extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
     alignItems: "center",
-    marginHorizontal: 90,
-    width: "55%",
+    // marginHorizontal: '10%',
+    width: "100%",
     paddingTop: 10
   },
   starContainer: {

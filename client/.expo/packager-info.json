@@ -1,9 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 33022,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": "https://bm-73m.glarsen.client.exp.direct",
+  "packagerNgrokUrl": "https://packager.bm-73m.glarsen.client.exp.direct",
+  "ngrokPid": 7804,
+  "webpackServerPort": null
 }

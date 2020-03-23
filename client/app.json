@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "tasty-tours",
+    "name": "Tasty Tours",
     "slug": "tasty-tours",
     "description": "A mobile app of Food Tasting Tours curated by local city guides.  For android devices, download the applicable expo client from the menu below, then scan the QR code to open it. For ios, unfortunately, Apple's requirements no longer allow for sharing a project via this method.",
     "privacy": "public",
@@ -12,7 +12,6 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -22,10 +21,10 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
-      "**/*"
+      "assets/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false
     }
   }
 }
